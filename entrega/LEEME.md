@@ -19,3 +19,9 @@ El paquete excluye claves reales, .env, usuarios iniciales, datos comerciales y 
 La aplicación fue probada localmente con SQLite y MariaDB (64 tests y 431 assertions en cada ejecución). La validación en el hosting real, SMTP/cron, revisión de accesibilidad y aprobación visual/editorial siguen pendientes. La publicación en producción requiere autorización expresa del propietario.
 
 Consulta **SHA256SUMS.txt** para comprobar la integridad de los ZIP. Esta rama conserva el paquete contractual original que ya estaba en main y añade únicamente la carpeta entrega. No modifica main ni el sitio en producción.
+
+## Actualización solicitada: MFA temporal
+
+Parche incremental de 4 KB: [descargar JMAC-actualizacion-MFA.zip](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-actualizacion-MFA.zip).
+
+Permite configurar JMAC_MFA_REQUIRED=false sin reinstalar la app. Sigue exigiendo correo/contraseña y permisos. Instrucciones y reactivación en [actualizaciones/MFA/LEEME.md](actualizaciones/MFA/LEEME.md). No incluye .env ni modifica la base de datos. 77 tests / 542 aserciones correctas, Pint correcto; aplicación del parche en cPanel pendiente.

@@ -1,0 +1,18 @@
+{
+  "archive": "JMAC-actualizacion-MFA.zip",
+  "bytes": 4221,
+  "sha256": "8cb6355e4e5bc2eb7264ae5ffbd39d88f7d565aec83fe37aadf2e688325bb6c3",
+  "members": [
+    "jmac_app/config/auth.php",
+    "jmac_app/app/Http/Middleware/AdminAccess.php",
+    "LEEME_ACTUALIZACION_MFA.txt",
+    "CHECKSUMS_MFA_SHA256.txt"
+  ],
+  "extract_overlay_preserves_env_and_public": true,
+  "tests": 77,
+  "assertions": 542,
+  "test_result": "passed",
+  "pint": "passed",
+  "migration_changes": 0,
+  "hosting_patch_applied": false
+}
