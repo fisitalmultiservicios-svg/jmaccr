@@ -25,3 +25,9 @@ Consulta **SHA256SUMS.txt** para comprobar la integridad de los ZIP. Esta rama c
 Parche incremental de 4 KB: [descargar JMAC-actualizacion-MFA.zip](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-actualizacion-MFA.zip).
 
 Permite configurar JMAC_MFA_REQUIRED=false sin reinstalar la app. Sigue exigiendo correo/contraseña y permisos. Instrucciones y reactivación en [actualizaciones/MFA/LEEME.md](actualizaciones/MFA/LEEME.md). No incluye .env ni modifica la base de datos. 77 tests / 542 aserciones correctas, Pint correcto; aplicación del parche en cPanel pendiente.
+
+## Actualización visual: logo, carrito y editor sencillo
+
+[Descargar JMAC-actualizacion-visual.zip](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-actualizacion-visual.zip). Parche incremental de 123 KB para la app ya instalada; incluye recursos compilados en ambos layouts públicos.
+
+Logo oficial, carrito con panel lateral, edición pulsando las secciones de la vista previa y crédito editable Creado por fisitalcr. [Instrucciones](actualizaciones/visual/LEEME.md) y [capturas reales de pruebas](actualizaciones/visual/capturas/). 78 tests / 567 aserciones correctas y navegador sin errores en cinco anchos. No reinstalar ni ejecutar semillas; .env, usuarios, datos y configuración MFA preservados. Aplicación del parche en cPanel pendiente.

@@ -1,0 +1,37 @@
+{
+  "archive": "JMAC-actualizacion-visual.zip",
+  "bytes": 125580,
+  "sha256": "b2aa5dd6feb85d4faf8b6b0c2ab30cccefa297336b06c6671ba363e46f0c6b73",
+  "members": 29,
+  "tests": 78,
+  "assertions": 567,
+  "test_result": "passed",
+  "build": "passed",
+  "pint": "passed",
+  "browser": {
+    "result": "PASSED",
+    "logo_clean_asset_loaded": true,
+    "default_footer_credit": true,
+    "drawer_empty_open_escape_focus": true,
+    "cart_quantity_remove_persistence": true,
+    "page_click_select_save_reload": true,
+    "new_block_style_persists": true,
+    "draft_isolation": true,
+    "unsaved_publication_prevented": true,
+    "theme_credit_preview_save_publish": true,
+    "responsive_widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "javascript_errors": [],
+    "database": "jmac_visual_test",
+    "database_removed": true
+  },
+  "overlay_preserves_env_storage_index": true,
+  "compiled_assets_verified_both_layouts": true,
+  "migration_changes": 0,
+  "hosting_patch_applied": false
+}
