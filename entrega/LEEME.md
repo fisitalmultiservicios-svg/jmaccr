@@ -1,5 +1,14 @@
 # JMAC 2.0 — Entrega para revisión
 
+## Reparar estilos y logo después de la actualización
+
+Se encontró y corrigió un error en el ZIP por partes: los archivos públicos tenían permisos 0600. La extracción Python usada en la primera prueba no restauraba esos permisos y no detectó el fallo en hosting compartido. La entrega actual tiene archivos 0644 y directorios 0755 explícitos.
+
+Si ya instalaste la primera versión y la web aparece sin diseño, descarga [JMAC-reparacion-estilos-logo.zip](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-reparacion-estilos-logo.zip) y extráelo en /home/jmaccr. Contiene solo CSS/logo/manifiestos en ambos directorios públicos; no incluye JavaScript, .env, base de datos ni PHP. [Pasos y permisos de carpetas](actualizaciones/reparacion-estilos/LEEME.md).
+
+Se probó con unzip nativo: error 0600 reproducido, lectura de CSS/PNG reparada y datos/configuración/índices conservados. Unzip conserva permisos de carpetas existentes: se probó y documentó el ajuste manual 0755 para una carpeta pública restrictiva. Navegador: estilos efectivos, logo, carrito/editor y cinco anchos correctos. [Evidencia](actualizaciones/reparacion-estilos/EVIDENCIA.json). La aplicación en el hosting todavía debe comprobarse.
+
+
 ## Descargar y ver la web
 
 1. Descarga [JMAC-preview.zip](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-preview.zip). Si GitHub abre una pantalla del archivo, pulsa **Download raw file** (icono de descarga).

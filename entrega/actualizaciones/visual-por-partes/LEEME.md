@@ -1,5 +1,7 @@
 # JMAC 2.0 — actualización mediante archivos individuales
 
+Corrección de empaquetado: la primera versión guardaba archivos con permisos 0600. La entrega actual especifica 0644 para archivos y 0755 para directorios públicos. Si ya aplicaste la primera versión y la web aparece sin estilos/logo, usa el parche pequeño explicado en [REPARACION_ESTILOS_LOGO.md](../reparacion-estilos/LEEME.md). No vuelvas a extraer una copia antigua del ZIP.
+
 Alternativa de instalación para el propietario, que no dispone de soporte del hosting. El ZIP anterior sigue retirado. No se ha confirmado un falso positivo ni se certifica un resultado antivirus del servidor.
 
 Los archivos proceden de la misma aplicación limpia revisada y probada. El JavaScript se entrega como `.js` normal, sin codificarlo, ocultarlo ni cambiar su extensión. El antivirus del hosting debe permanecer activo y aceptar cada subida; si rechaza cualquier archivo, detener el proceso y conservar el aviso. No se utilizan ZIP cifrados, descargas desde PHP ni scripts que eludan el Administrador de archivos.

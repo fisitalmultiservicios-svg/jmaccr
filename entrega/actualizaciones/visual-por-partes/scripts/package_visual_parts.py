@@ -5,6 +5,7 @@ from zipfile import ZIP_DEFLATED, ZipFile
 import hashlib
 import json
 import sys
+from zip_permissions import write_entries
 
 root = Path(__file__).resolve().parents[1]
 old = Path('/workspace/JMAC-actualizacion-visual.zip')
@@ -37,12 +38,13 @@ for prefix in ['jmac_app/public', 'public_html']:
 entries['CHECKSUMS_VISUAL_PARTES_SHA256.txt'] = ''.join(f'{digest}  {name}\n' for name, digest in sorted(checks.items())).encode()
 archive_path = destination / 'JMAC-visual-PHP-CSS-logo.zip'
 with ZipFile(archive_path, 'w', ZIP_DEFLATED, compresslevel=9) as archive:
-    for name, data in sorted(entries.items()):
-        archive.writestr(name, data)
+    write_entries(archive, entries)
 (destination / asset_name).write_bytes(asset.read_bytes())
+(destination / asset_name).chmod(0o644)
 metadata = {'archive': archive_path.name, 'bytes': archive_path.stat().st_size,
             'sha256': hashlib.sha256(archive_path.read_bytes()).hexdigest(),
-            'archive_members': len(entries), 'archive_javascript_files': 0,
+            'archive_payload_files': len(entries), 'archive_javascript_files': 0,
+            'file_permissions': '0644', 'directory_permissions': '0755',
             'javascript': asset_name, 'javascript_bytes': asset.stat().st_size,
             'javascript_sha256': hashlib.sha256(asset.read_bytes()).hexdigest(),
             'original_reviewed_runtime_unchanged': True, 'migrations': 0,

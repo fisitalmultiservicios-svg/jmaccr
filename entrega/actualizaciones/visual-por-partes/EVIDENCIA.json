@@ -1,9 +1,11 @@
 {
   "archive": "JMAC-visual-PHP-CSS-logo.zip",
-  "bytes": 96366,
-  "sha256": "ede7e7dfeb9aa0dca08cb4b055e42e8c549a8608ad68489330f0627aebc3f365",
-  "archive_members": 25,
+  "bytes": 99542,
+  "sha256": "bae6ed10c6f8977cd9c723689fc2438067c35758e8595d89a9865f5eb43bf8c5",
+  "archive_payload_files": 25,
   "archive_javascript_files": 0,
+  "file_permissions": "0644",
+  "directory_permissions": "0755",
   "javascript": "app-B9eZnYus.js",
   "javascript_bytes": 28466,
   "javascript_sha256": "aeef49f861eb9f5be65dfcf28f7c1e594b59853f348441d4cba0fce416a9b18d",
@@ -35,18 +37,14 @@
     "public_html/build/manifest.json": "c783c252d6d99915772b298d5745d76d8a6087d0a267d9fbe26c1430103a53be",
     "jmac_app/public/brand/jmac-logo.png": "a339683a62c4448e5e7ca594e83744c9d65082bafcd0332363c9ec9aebf9651d",
     "public_html/brand/jmac-logo.png": "a339683a62c4448e5e7ca594e83744c9d65082bafcd0332363c9ec9aebf9651d",
-    "jmac_app/docs/ACTUALIZACION_POR_PARTES.md": "6b093bdda128590812ca9b4f9638f1d000132bf7325a9cb22053f0dd017d93d2",
-    "LEEME_VISUAL_POR_PARTES.txt": "6b093bdda128590812ca9b4f9638f1d000132bf7325a9cb22053f0dd017d93d2",
+    "jmac_app/docs/ACTUALIZACION_POR_PARTES.md": "53eeff0dd9ce0043466df54b0b4e3445c78fc38433ae6d895127eae5ce3ff55a",
+    "LEEME_VISUAL_POR_PARTES.txt": "53eeff0dd9ce0043466df54b0b4e3445c78fc38433ae6d895127eae5ce3ff55a",
     "jmac_app/public/build/assets/app-B9eZnYus.js": "aeef49f861eb9f5be65dfcf28f7c1e594b59853f348441d4cba0fce416a9b18d",
     "public_html/build/assets/app-B9eZnYus.js": "aeef49f861eb9f5be65dfcf28f7c1e594b59853f348441d4cba0fce416a9b18d"
   },
-  "overlay_test": "PASSED",
-  "protected_env_storage_index_mfa_preserved": true,
-  "both_build_manifests_resolve": true,
-  "baseline_archive_sha256": "dae3c59440f4681d74fa7ce8cdf0d0f295686a53dc8fb767d0398b0975200b67",
-  "browser_test": "PASSED",
-  "browser_target": "previous cPanel release + MFA patch + individual JS + PHP/CSS/logo overlay; real public_html wrapper",
-  "browser": {
+  "native_unzip_permission_checks": "PASSED",
+  "protected_files_and_permissions_unchanged": "PASSED",
+  "browser_runtime_evidence": {
     "result": "PASSED",
     "logo_clean_asset_loaded": true,
     "default_footer_credit": true,
@@ -68,12 +66,6 @@
     "database": "jmac_visual_test",
     "database_removed": true
   },
-  "node_check": "PASSED",
-  "application_changes_since_functional_tests": false,
-  "prior_php_unit_tests": {
-    "tests": 78,
-    "assertions": 567,
-    "result": "PASSED",
-    "rerun_for_distribution_only": false
-  }
+  "browser_target": "previous release + old visual patch + asset repair + documented public-directory permission fallback; corrected full patch runtime contents identical",
+  "original_archive_0600_bug_corrected": true
 }

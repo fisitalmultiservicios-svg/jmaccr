@@ -69,6 +69,8 @@ with tempfile.TemporaryDirectory(prefix='jmac-visual-browser-') as temporary:
                 public = context.new_page()
                 public.on('pageerror', lambda error: errors.append(str(error)))
                 public.goto(BASE + '/')
+                expect(public.locator('.header-inner')).to_have_css('display', 'flex')
+                expect(public.locator('.site-footer')).to_have_css('background-color', 'rgb(13, 37, 72)')
                 expect(public.locator('.site-header .site-logo')).to_be_visible()
                 assert public.locator('.site-header .site-logo').evaluate('(image) => image.naturalWidth === 679')
                 expect(public.locator('.footer-credit')).to_have_text('Creado por fisitalcr')
