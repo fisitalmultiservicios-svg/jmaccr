@@ -1,4 +1,3 @@
 9b736155f5498dd5cac7f494d9b25ec4c6777efb1db94911163c4283d0a6aed3  JMAC-preview.zip
 dae3c59440f4681d74fa7ce8cdf0d0f295686a53dc8fb767d0398b0975200b67  JMAC-cpanel.zip
 8cb6355e4e5bc2eb7264ae5ffbd39d88f7d565aec83fe37aadf2e688325bb6c3  JMAC-actualizacion-MFA.zip
-b2aa5dd6feb85d4faf8b6b0c2ab30cccefa297336b06c6671ba363e46f0c6b73  JMAC-actualizacion-visual.zip

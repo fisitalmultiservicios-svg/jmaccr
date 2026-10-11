@@ -26,8 +26,10 @@ Parche incremental de 4 KB: [descargar JMAC-actualizacion-MFA.zip](https://githu
 
 Permite configurar JMAC_MFA_REQUIRED=false sin reinstalar la app. Sigue exigiendo correo/contraseña y permisos. Instrucciones y reactivación en [actualizaciones/MFA/LEEME.md](actualizaciones/MFA/LEEME.md). No incluye .env ni modifica la base de datos. 77 tests / 542 aserciones correctas, Pint correcto; aplicación del parche en cPanel pendiente.
 
-## Actualización visual: logo, carrito y editor sencillo
+## Actualización visual: instalación suspendida
 
-[Descargar JMAC-actualizacion-visual.zip](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-actualizacion-visual.zip). Parche incremental de 123 KB para la app ya instalada; incluye recursos compilados en ambos layouts públicos.
+El hosting rechazó `JMAC-actualizacion-visual.zip` con `Sanesecurity.Foxhole.JS_Zip_20.UNOFFICIAL`. Se retira el archivo de la entrega actual mientras se analiza la detección; no se considera aplicado ni limpio. No desactivar el antivirus ni cambiar el contenedor/extensiones para eludirlo.
 
-Logo oficial, carrito con panel lateral, edición pulsando las secciones de la vista previa y crédito editable Creado por fisitalcr. [Instrucciones](actualizaciones/visual/LEEME.md) y [capturas reales de pruebas](actualizaciones/visual/capturas/). 78 tests / 567 aserciones correctas y navegador sin errores en cinco anchos. No reinstalar ni ejecutar semillas; .env, usuarios, datos y configuración MFA preservados. Aplicación del parche en cPanel pendiente.
+[Informe y mensaje para soporte](actualizaciones/visual/ANTIVIRUS.md). Se comprobaron integridad, correspondencia con fuentes y compilación reproducible. El análisis antivirus queda pendiente: descarga de firmas bloqueada por el proxy. Estos controles no certifican ausencia de malware.
+
+Los cambios de logo/carrito/editor siguen disponibles en el código local y documentados en [las instrucciones suspendidas](actualizaciones/visual/LEEME.md) y [capturas de pruebas funcionales](actualizaciones/visual/capturas/). El rechazo no reinstala ni modifica la aplicación del propietario.

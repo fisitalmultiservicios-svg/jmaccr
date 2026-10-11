@@ -1,5 +1,7 @@
 # JMAC 2.0 — logo, carrito y edición sencilla
 
+**Instalación suspendida:** el hosting rechazó el ZIP por `Sanesecurity.Foxhole.JS_Zip_20.UNOFFICIAL`. No seguir los pasos de subida hasta resolver la detección. Consulta [la revisión y el mensaje para soporte](ANTIVIRUS_ACTUALIZACION_VISUAL.md). Las pruebas funcionales descritas abajo no son una certificación antivirus.
+
 Actualización solicitada por el propietario el 10 de octubre de 2026.
 
 ## Cambios
