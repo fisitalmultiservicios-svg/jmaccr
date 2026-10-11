@@ -33,3 +33,14 @@ El hosting rechazó `JMAC-actualizacion-visual.zip` con `Sanesecurity.Foxhole.JS
 [Informe y mensaje para soporte](actualizaciones/visual/ANTIVIRUS.md). Se comprobaron integridad, correspondencia con fuentes y compilación reproducible. El análisis antivirus queda pendiente: descarga de firmas bloqueada por el proxy. Estos controles no certifican ausencia de malware.
 
 Los cambios de logo/carrito/editor siguen disponibles en el código local y documentados en [las instrucciones suspendidas](actualizaciones/visual/LEEME.md) y [capturas de pruebas funcionales](actualizaciones/visual/capturas/). El rechazo no reinstala ni modifica la aplicación del propietario.
+
+## Instalación mediante archivos individuales
+
+El propietario no dispone de soporte del hosting. Se entrega una alternativa que mantiene el antivirus activo y el JavaScript visible con su extensión normal; cada subida debe ser aceptada por el escáner antes de aplicar la actualización.
+
+- [JMAC-visual-PHP-CSS-logo.zip](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-visual-PHP-CSS-logo.zip): archivos PHP, plantillas, CSS y logo; sin archivos JavaScript.
+- [app-B9eZnYus.js](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/actualizaciones/visual-por-partes/app-B9eZnYus.js): script compilado para subir directamente a ambas carpetas de assets.
+
+[Pasos con las carpetas exactas](actualizaciones/visual-por-partes/LEEME.md). Analizar primero ambos archivos con Windows Defender actualizado. Si cualquier antivirus rechaza un archivo, detener la instalación. No usar el ZIP anterior retirado.
+
+Probado sobre una copia del release anterior y el parche MFA, con el public_html real de esa estructura: editor/carrito/logo/pie y cinco anchos correctos, sin errores JS; BD QA eliminada. .env/storage/índices/MFA conservados y manifiestos resueltos. [Evidencia](actualizaciones/visual-por-partes/EVIDENCIA.json). Aceptación antivirus e instalación en el hosting pendientes; no se afirma un falso positivo confirmado.

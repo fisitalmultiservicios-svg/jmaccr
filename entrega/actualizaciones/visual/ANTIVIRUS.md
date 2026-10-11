@@ -8,6 +8,8 @@ Sanesecurity.Foxhole.JS_Zip_20.UNOFFICIAL FOUND
 
 La actualización visual queda suspendida. No se considera aplicada en cPanel ni aprobada por el antivirus. No volver a subir el mismo archivo, desactivar el escáner, ocultar extensiones o cambiar el contenedor para eludir la detección.
 
+Actualización posterior: el dueño informó que no dispone de soporte. Se preparó una [instalación mediante archivos individuales](../visual-por-partes/LEEME.md): el script se sube directamente con su extensión `.js` y pasa por el antivirus, mientras PHP/CSS/logo se entregan en un ZIP separado. No se usa otra extensión, contenedor cifrado ni descarga desde PHP. La instalación depende de que el escáner acepte cada archivo; no confirma que el aviso anterior fuera un falso positivo. Los resultados anteriores se conservan como registro histórico.
+
 ## Evidencia comprobada
 
 - Archivo de 125.580 bytes, 29 entradas y CRC correcto.
