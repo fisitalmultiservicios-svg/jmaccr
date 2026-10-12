@@ -1,8 +1,26 @@
 @extends('layouts.site')
 @section('content')
-@if(count($document['blocks']))
-@if(($document['blocks'][0]['type']??'')!=='hero')<div class="shell section-space"><h1>{{ $page->title }}</h1></div>@endif
-@include('site.blocks',['blocks'=>$document['blocks']])
+@php
+    $blocks = $document['blocks'];
+    if ($page->slug === 'catalogo') {
+        $blocks = array_values(array_filter($blocks, static function (array $block): bool {
+            // The full catalogue below already includes its categories and cart.
+            if ($block['type'] === 'catalog_categories') {
+                return false;
+            }
+            if ($block['type'] === 'cta') {
+                $data = $block['data'];
+                return filled($data['heading'] ?? null) || filled($data['body'] ?? null) || filled($data['button_url'] ?? null);
+            }
+            return true;
+        }));
+    }
+@endphp
+@if(count($blocks))
+@if(($blocks[0]['type']??'')!=='hero')
+@if($page->slug==='catalogo')<h1 class="sr-only">{{ $page->title }}</h1>@else<div class="shell section-space"><h1>{{ $page->title }}</h1></div>@endif
+@endif
+@include('site.blocks',['blocks'=>$blocks])
 @else
 @if(!in_array($page->slug,['nosotros','contacto','novedades','catalogo']))
 <section class="page-heading"><div class="shell"><p class="eyebrow">JMAC · FOR THE INDUSTRY</p><h1>{{ $page->slug==='' ? 'JMAC para la industria' : $page->title }}</h1><p>{{ $page->slug==='' ? 'LIDER EN EL MERCADO INDUSTRIAL' : 'Información corporativa y atención JMAC' }}</p><div class="actions"><a class="button" href="/catalogo/">Ver catálogo</a><a class="button secondary" href="/contacto/">Contáctanos</a></div></div></section>

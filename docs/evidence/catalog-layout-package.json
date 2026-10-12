@@ -1,0 +1,28 @@
+{
+  "archive": "JMAC-ajuste-espacio-catalogo.zip",
+  "bytes": 19704,
+  "sha256": "4641e2b12354e4a757957dd4d4072b82199d8dbbaf97aeda6b3f6f6071427e43",
+  "file_checksums": {
+    "jmac_app/resources/views/site/page.blade.php": "2101156baf1bb8b0e79f9250f12b0cb1f2df6f008989c742ceffff9568b43137",
+    "jmac_app/resources/views/site/catalog.blade.php": "259f4c67f6a6fd4d1e815045f6834f9815af88728fec37c8efa7d16fb3363b88",
+    "jmac_app/public/build/manifest.json": "ba17ec6328e7f54f33b86dd10d2c6a10de1c2d70935b066aabbaba882a6555d3",
+    "jmac_app/public/build/assets/app-CryZ5o9O.css": "9a45ddcc5973864b8827cb615eb01cedffe6df8b5340546fb8014c1d7c42f3aa",
+    "public_html/build/manifest.json": "ba17ec6328e7f54f33b86dd10d2c6a10de1c2d70935b066aabbaba882a6555d3",
+    "public_html/build/assets/app-CryZ5o9O.css": "9a45ddcc5973864b8827cb615eb01cedffe6df8b5340546fb8014c1d7c42f3aa",
+    "LEEME_AJUSTE_CATALOGO.txt": "86cadb7242e115dc4756d811da4579e07a7157170988b5c13704765ee9e37e51"
+  },
+  "file_permissions": "0644",
+  "directory_permissions": "0755",
+  "javascript_in_archive": false,
+  "migrations": 0,
+  "database_changes": false,
+  "hosting_applied": false,
+  "native_unzip_overlay": "PASSED",
+  "env_storage_and_index_preserved": true,
+  "private_app_root_permissions_preserved": true,
+  "both_public_manifests_resolve": true,
+  "packaged_browser": "PASSED",
+  "packaged_browser_database_removed": true,
+  "minimum_catalog_gap_px": 24,
+  "maximum_catalog_gap_px": 24
+}

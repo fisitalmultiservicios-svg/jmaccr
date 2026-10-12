@@ -2,6 +2,12 @@
 
 El propietario confirmó «PERFECTO» después de reparar los permisos de CSS/logo, aprobó el diseño y pidió la versión de producción con dos cambios: retirar el banner compartido de Nosotros/Contáctanos/Novedades/Catálogo e importar productos nuevos desde Excel. La versión 1.0.0 implementa ambos. La instalación fue realizada por el propietario; no se afirma despliegue remoto de esta actualización, verificación DNS/SMTP ni cierre externo de los 48 casos.
 
+## Corrección posterior: espacio vacío del catálogo
+
+El propietario mostró un hueco con el título Catálogo después del menú. Se reprodujo con la revisión semilla publicada: el título automático y dos bloques técnicos vacíos seguían consumiendo altura. La vista ahora omite el título visible y los contenedores vacíos/duplicados del catálogo, conservando contenido real, categorías, filtros, productos, carrito, revisiones y SEO. Separación de 24 px bajo el menú, en cinco anchos. Sin cambios de BD, migraciones, .env, MFA ni JavaScript.
+
+`npm run build`, `php artisan test --filter=PublicSiteTest` (2 tests / 55 aserciones) y `vendor/bin/pint --test`: PASSED. Chromium con catálogo publicado vacío y con un producto nuevo en 360/390/768/1303/1440 px: 24 px de separación, búsqueda visible, carrito real y cero errores JS/desbordamientos; BD QA eliminada. El primer ensayo local encontró una directiva de clase Blade inválida, corregida con @class antes del empaquetado y las ejecuciones correctas. Parche JMAC-ajuste-espacio-catalogo.zip; procedimiento AJUSTE_CATALOGO.md. Evidencia catalog-layout-before/after y capturas. ZIP aplicado con unzip nativo sobre una copia del integral oficial: configuración/storage/índice y permisos privados conservados; navegador contra public_html con vendor runtime repite los diez casos correctamente. Aplicación en el hosting por el dueño pendiente.
+
 ## Entrega oficial 1.0.0
 
 - Las cuatro páginas secundarias mantienen navegación, títulos accesibles/SEO y contenido, sin el banner de título y botones. Inicio conserva su cabecera. No se borran bloques publicados por el dueño ni se publican borradores.

@@ -1,0 +1,81 @@
+{
+  "phase": "packaged",
+  "result": "PASSED",
+  "published_seed_revision": true,
+  "layouts": [
+    {
+      "state": "empty",
+      "width": 360,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 0
+    },
+    {
+      "state": "empty",
+      "width": 390,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 0
+    },
+    {
+      "state": "empty",
+      "width": 768,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 0
+    },
+    {
+      "state": "empty",
+      "width": 1303,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 0
+    },
+    {
+      "state": "empty",
+      "width": 1440,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 0
+    },
+    {
+      "state": "populated",
+      "width": 360,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 1
+    },
+    {
+      "state": "populated",
+      "width": 390,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 1
+    },
+    {
+      "state": "populated",
+      "width": 768,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 1
+    },
+    {
+      "state": "populated",
+      "width": 1303,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 1
+    },
+    {
+      "state": "populated",
+      "width": 1440,
+      "header_to_catalog_heading_px": 24,
+      "horizontal_overflow": false,
+      "product_cards": 1
+    }
+  ],
+  "javascript_errors": [],
+  "real_cart_checked": true,
+  "environment": "local PHP 8.4/MariaDB; no remote cPanel access",
+  "database_removed": true
+}
