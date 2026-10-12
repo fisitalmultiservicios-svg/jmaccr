@@ -1,0 +1,17 @@
+{
+  "result": "PASSED",
+  "rows": 2,
+  "sku_preserved": true,
+  "photos_associated": true,
+  "specific_photo_error": "Una fotograf\u00eda excede los 8 MB; compr\u00edmela antes de subir el Excel.",
+  "native_unzip": true,
+  "preserved_env_vendor_public_index_assets": true,
+  "preserved_private_root_permissions": true,
+  "runtime_vendor_only": true,
+  "database": "no database used",
+  "javascript_files_in_patch": 0,
+  "migrations": 0,
+  "owner_original_workbook_tested": false,
+  "hosting_applied": false,
+  "archive_sha256": "489ac10f740b7a0b5a38cf0b542260f2457b61d17d3a737d3079ed3ed9343d17"
+}

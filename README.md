@@ -6,6 +6,8 @@ El propietario aprobó el diseño reparado y solicitó esta versión. [Actualiza
 
 Inventario con **Nombre, Descripción, Categoría, Imagen, SKU** y fotos incrustadas: [actualización y límites PHP](docs/EXCEL_CON_FOTOGRAFIAS.md).
 
+Aviso «Excel demasiado grande o con contenido activo» con PHP en 512M: [corrección de compatibilidad y diagnóstico preciso](docs/EXCEL_ERROR_DETALLADO.md).
+
 Corrección posterior de la página publicada: [quitar el espacio vacío del catálogo](docs/AJUSTE_CATALOGO.md). El parche se aplica después del paquete oficial 1.0.0; el código fuente de esta rama ya incorpora el ajuste.
 
 Sin WordPress/importación vieja/pagos. Cero productos/categorías/marcas/artículos/solicitudes/usuarios iniciales, sin contraseña default. Semilla DRAFT/fotos candidatas y contactos/legal pendientes. No modifica producción automáticamente.

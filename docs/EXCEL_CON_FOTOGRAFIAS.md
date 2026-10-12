@@ -19,6 +19,8 @@ No añadas enlaces, rutas locales ni fórmulas IMAGE/DISPIMG a Imagen: no se des
 
 ## Límites y almacenamiento
 
+Si aparece «Excel demasiado grande o con contenido activo» aunque PHP esté en 512M, aplica la corrección JMAC-correccion-Excel.zip siguiendo EXCEL_ERROR_DETALLADO.md. Admite los ajustes normales de impresión internos sin ejecutarlos y reemplaza ese aviso general por la causa específica. No aumenta ni elimina límites de seguridad.
+
 Hasta **128 MB**, sujeto al PHP del hosting; hasta **2.000 filas de productos**, **30 columnas** y **cinco fotos por SKU**. Cada foto JPEG/PNG/WebP (AVIF si GD lo admite) puede tener hasta **8 MB y 20 megapíxeles**. Máximo 256 MB descomprimidos del libro y 16 MB de XML; se rechazan macros, entidades, fórmulas, vínculos externos, rutas inseguras, partes duplicadas y archivos ajenos a XLSX/medios admitidos.
 
 Las fotos se decodifican con GD y se guardan como WebP, con lado mayor de 1920 px y miniatura de 480 px. Nunca se sirve el fichero original ni sus metadatos. El libro temporal está fuera de public_html, con permisos 0600; datos normalizados y fotos preparadas están cifrados. Aplicar, cancelar, vencer o detectar un error elimina los temporales. La vista previa no crea productos, categorías ni registros de medios. Una falla SQL retira los archivos nuevos y revierte toda la transacción.

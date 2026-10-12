@@ -52,7 +52,8 @@ final class ExcelCatalog
                 $this->fail('Usa un Excel sencillo basado en la plantilla JMAC.');
             }
             $total = $xmlTotal = 0;
-            $names = [];
+            $names = $printerSettings = [];
+            $contentTypes = '';
             for ($index = 0; $index < $zip->numFiles; $index++) {
                 $entry = $zip->statIndex($index);
                 $name = $entry['name'];
@@ -61,8 +62,36 @@ final class ExcelCatalog
                     $this->fail('El Excel contiene partes internas repetidas.');
                 }
                 $names[$name] = true;
-                if ($total > 256 * 1024 * 1024 || $entry['size'] > 10 * 1024 * 1024 || str_contains($name, '..') || str_contains($name, '\\') || str_starts_with($name, '/') || ($entry['encryption_method'] ?? 0) !== 0 || preg_match('~(?:vbaProject|externalLinks|embeddings|connections\.xml)|\.(?:bin|php|js|exe|svg)$~i', $name)) {
-                    $this->fail('Excel demasiado grande o con contenido activo. Usa la plantilla sin macros, vínculos externos ni objetos incrustados.');
+                if (str_contains($name, '..') || str_contains($name, '\\') || str_starts_with($name, '/')) {
+                    $this->fail('La estructura interna del Excel no es válida. Guarda una copia nueva como .xlsx.');
+                }
+                if (($entry['encryption_method'] ?? 0) !== 0) {
+                    $this->fail('El Excel contiene partes cifradas. Guarda una copia .xlsx sin contraseña.');
+                }
+                if ($total > 256 * 1024 * 1024) {
+                    $this->fail('El Excel supera 256 MB al descomprimirlo, aunque el archivo pese menos. Comprime las fotografías en Excel o divide el inventario en varios archivos.');
+                }
+                if (preg_match('~vbaProject|\.(?:php|js|exe|svg)$~i', $name)) {
+                    $this->fail('El Excel contiene macros o archivos ejecutables no admitidos. Guarda una copia .xlsx sin macros.');
+                }
+                if (preg_match('~externalLinks|connections\.xml~i', $name)) {
+                    $this->fail('El Excel contiene vínculos de datos o conexiones externas. Elimínalos y guarda una copia con valores y fotografías incrustadas.');
+                }
+                if (preg_match('~embeddings~i', $name)) {
+                    $this->fail('El Excel contiene objetos incrustados, como documentos o controles. Elimina esos objetos; las fotografías pegadas en Imagen sí se admiten.');
+                }
+                if (preg_match('~^xl/printerSettings/printerSettings[1-9][0-9]*\.bin$~D', $name)) {
+                    if ($entry['size'] > 256 * 1024) {
+                        $this->fail('Los ajustes de impresión del Excel superan 256 KB. Guarda una copia sin ajustes de impresora.');
+                    }
+                    // Standard OOXML DEVMODE data: validate its declared type below,
+                    // but never read, extract, execute or publish its binary bytes.
+                    $printerSettings[] = $name;
+
+                    continue;
+                }
+                if (preg_match('/\.bin$/i', $name)) {
+                    $this->fail('El Excel contiene un archivo binario no admitido. Guarda una copia .xlsx sin macros, controles ni objetos incrustados.');
                 }
                 if (! preg_match('/\.(xml|rels|vml)$/i', $name)) {
                     if (! str_ends_with($name, '/') && ! preg_match('/\.(png|jpe?g|webp|avif)$/i', $name)) {
@@ -75,6 +104,9 @@ final class ExcelCatalog
 
                     continue;
                 }
+                if ($entry['size'] > 10 * 1024 * 1024) {
+                    $this->fail('Una parte XML del Excel supera 10 MB. Copia solo las filas utilizadas a la plantilla o divide el inventario en varios archivos.');
+                }
                 $xmlTotal += $entry['size'];
                 if ($xmlTotal > 16 * 1024 * 1024) {
                     $this->fail('Los datos XML del libro superan 16 MB. Divide el Excel en partes.');
@@ -85,6 +117,9 @@ final class ExcelCatalog
                 }
                 if ($name === '[Content_Types].xml' && stripos($xml, 'macroEnabled') !== false) {
                     $this->fail('No se admiten libros habilitados para macros.');
+                }
+                if ($name === '[Content_Types].xml') {
+                    $contentTypes = $xml;
                 }
                 if (str_starts_with($name, 'xl/worksheets/') && str_ends_with($name, '.xml')) {
                     $previous = libxml_use_internal_errors(true);
@@ -152,8 +187,48 @@ final class ExcelCatalog
                     }
                 }
             }
+            if ($printerSettings !== []) {
+                $this->validatePrinterSettings($contentTypes, $printerSettings);
+            }
         } finally {
             $zip->close();
+        }
+    }
+
+    private function validatePrinterSettings(string $xml, array $parts): void
+    {
+        $document = new DOMDocument;
+        $previous = libxml_use_internal_errors(true);
+        try {
+            if ($xml === '' || ! $document->loadXML($xml, LIBXML_NONET | LIBXML_COMPACT) || $document->doctype) {
+                $this->fail('Los tipos de contenido del Excel no son válidos. Guarda una copia nueva como .xlsx.');
+            }
+            $namespace = 'http://schemas.openxmlformats.org/package/2006/content-types';
+            $binaryType = null;
+            $overrides = [];
+            foreach ($document->getElementsByTagNameNS($namespace, 'Default') as $entry) {
+                if (strtolower($entry->getAttribute('Extension')) === 'bin') {
+                    if ($binaryType !== null) {
+                        $this->fail('El Excel declara tipos binarios repetidos. Guarda una copia nueva como .xlsx.');
+                    }
+                    $binaryType = $entry->getAttribute('ContentType');
+                }
+            }
+            foreach ($document->getElementsByTagNameNS($namespace, 'Override') as $entry) {
+                $part = $entry->getAttribute('PartName');
+                if (isset($overrides[$part])) {
+                    $this->fail('El Excel declara tipos de contenido repetidos. Guarda una copia nueva como .xlsx.');
+                }
+                $overrides[$part] = $entry->getAttribute('ContentType');
+            }
+            foreach ($parts as $part) {
+                if (($overrides['/'.$part] ?? $binaryType) !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.printerSettings') {
+                    $this->fail('Los ajustes de impresión del Excel tienen un tipo no admitido. Guarda una copia .xlsx sin macros ni objetos incrustados.');
+                }
+            }
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
         }
     }
 

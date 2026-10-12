@@ -1,0 +1,13 @@
+{
+  "command": "php artisan test",
+  "engine": "SQLite :memory:",
+  "result": "passed",
+  "tests": 101,
+  "passed": 101,
+  "assertions": 906,
+  "duration_ms": 21015,
+  "pint": "passed",
+  "initial_fixture_generation_failure": "ZIP test generation retained expanded padding in memory. Changed the generated fixture to stream from a temporary file; production limits and memory configuration were not increased.",
+  "owner_original_workbook_tested": false,
+  "hosting_applied": false
+}
