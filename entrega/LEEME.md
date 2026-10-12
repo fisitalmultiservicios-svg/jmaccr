@@ -1,5 +1,18 @@
 # JMAC 2.0 — versión oficial 1.0.0
 
+## Actualización: inventario Excel con fotografías
+
+[Descargar JMAC-Excel-con-fotografias.zip (42 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-Excel-con-fotografias.zip).
+
+Acepta Nombre, Descripción, Categoría, Imagen, SKU, con fotos incrustadas en la columna Imagen. Preparación automática en grupos pequeños, vista previa de fotos, aprobación/publicación explícitas y Sumar/Reemplazar con copia/transacción/histórico conservado. Formato OOXML anclado y Excel 365 dentro de celda. No descarga URLs.
+
+Sube el parche a /home/jmaccr, extráelo allí y pulsa Sistema → Diagnóstico → Vaciar caché. No reinstala ni cambia .env/BD/storage/MFA/vendor/assets; no incluye archivos JS ni nuevas migraciones. Para un archivo grande, en cPanel configura PHP upload_max_filesize=128M, post_max_size=144M (o 256M si el menú solo ofrece esa opción), memory_limit=256M. El panel muestra el límite real; el ZIP no cambia INI automáticamente.
+
+[Manual paso a paso](actualizaciones/excel-fotografias/LEEME.md) · [Evidencia de paquete](actualizaciones/excel-fotografias/EVIDENCIA.json) · [Capturas](actualizaciones/excel-fotografias/capturas/).
+
+98 tests / 798 aserciones SQLite y 20 / 221 MariaDB correctos. ZIP real probado contra public_html/vendor runtime con un Excel nuevo de 37.794.674 bytes: fotos, preparación automática, aprobación/publicación, Sumar/Reemplazar y carrito en cinco anchos, cero errores JS; BD QA eliminada. No se probó completo el adjunto original: supera el límite de transferencia de 32 MiB del cloud. Se comprobó el formato confirmado con archivos nuevos equivalentes. Aplicación/INI/QA del hosting pendientes; main permanece intacta.
+
+
 ## Corrección posterior: eliminar el hueco del catálogo
 
 [Descargar JMAC-ajuste-espacio-catalogo.zip (20 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-ajuste-espacio-catalogo.zip).
