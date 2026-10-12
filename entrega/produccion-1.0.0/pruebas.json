@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "date": "2026-10-12",
+  "result": "PASSED",
+  "php": "8.4.26 local; hosting 8.3 confirmed by owner, not accessed",
+  "tests": [
+    {
+      "command": "php artisan test",
+      "database": "SQLite :memory:",
+      "passed": 90,
+      "assertions": 705
+    },
+    {
+      "command": "php artisan test --filter='CatalogImportTest|PublicSiteTest'",
+      "database": "SQLite :memory:",
+      "passed": 14,
+      "assertions": 183,
+      "includes_final_slug_optimization": true
+    },
+    {
+      "command": "DB_CONNECTION=mysql DB_DATABASE=jmac_import_test php artisan test --filter='CatalogImportTest|PublicSiteTest'",
+      "database": "MariaDB 11.8.6 disposable",
+      "passed": 14,
+      "assertions": 183,
+      "database_removed": true
+    }
+  ],
+  "browser_packaged_update": "production-update-browser.json",
+  "browser_clean_install": "production-full-package-smoke.json",
+  "build": "npm run build PASSED",
+  "format": "vendor/bin/pint --test PASSED",
+  "composer_audit": "0 advisories and 0 abandoned",
+  "npm_audit": "0 vulnerabilities",
+  "migrations_new": 0,
+  "commercial_seed_zero": true,
+  "remote_hosting_dns_smtp_verified": false,
+  "antivirus_acceptance_certified": false
+}

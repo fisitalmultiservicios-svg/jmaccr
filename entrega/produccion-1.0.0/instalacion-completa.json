@@ -1,0 +1,49 @@
+{
+  "result": "PASSED",
+  "runtime_packages": 82,
+  "no_node_composer_required_at_runtime": true,
+  "installation_idempotent": true,
+  "seed": [
+    "categories: 0",
+    "brands: 0",
+    "products: 0",
+    "product_media: 0",
+    "preorders: 0",
+    "preorder_items: 0",
+    "contact_submissions: 0",
+    "posts: 0",
+    "post_categories: 0",
+    "pages published: 0"
+  ],
+  "layouts": [
+    {
+      "public_layout": "public",
+      "public_routes_200": 7,
+      "private_routes_denied": 4,
+      "admin_screens_200": 18,
+      "login_mfa": true,
+      "initial_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "javascript_errors": []
+    },
+    {
+      "public_layout": "public_html",
+      "public_routes_200": 7,
+      "private_routes_denied": 4,
+      "admin_screens_200": 18,
+      "login_mfa": true,
+      "initial_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "javascript_errors": []
+    }
+  ],
+  "environment": "local PHP 8.4/MariaDB; no access to owner cPanel"
+}

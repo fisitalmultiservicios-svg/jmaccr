@@ -4,3 +4,5 @@ dae3c59440f4681d74fa7ce8cdf0d0f295686a53dc8fb767d0398b0975200b67  JMAC-cpanel.zi
 bae6ed10c6f8977cd9c723689fc2438067c35758e8595d89a9865f5eb43bf8c5  JMAC-visual-PHP-CSS-logo.zip
 aeef49f861eb9f5be65dfcf28f7c1e594b59853f348441d4cba0fce416a9b18d  actualizaciones/visual-por-partes/app-B9eZnYus.js
 aaaded2f18ca043378528cbac2287981fb33cee812ab68011d49aebabbc78592  JMAC-reparacion-estilos-logo.zip
+5786e3917e6b53fcace2298c4c8caa9a5e04793fd1fb321bd8ab83cca43d2193  JMAC-2.0-PRODUCCION-1.0.0-ACTUALIZACION.zip
+57fdf26b6a323b1c632aa3fb65e7e7f306805b94dc08f9c4a8a6856a8c2d9bfd  JMAC-2.0-PRODUCCION-1.0.0-COMPLETO.zip

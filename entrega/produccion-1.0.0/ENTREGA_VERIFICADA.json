@@ -1,0 +1,13 @@
+{
+  "result": "PASSED",
+  "runtime_code_matches_update_files": 300,
+  "no_secrets_or_runtime_storage": true,
+  "runtime_packages": 82,
+  "files_0644_dirs_0755": true,
+  "full_archive": "JMAC-2.0-PRODUCCION-1.0.0-COMPLETO.zip",
+  "full_bytes": 21064078,
+  "full_sha256": "57fdf26b6a323b1c632aa3fb65e7e7f306805b94dc08f9c4a8a6856a8c2d9bfd",
+  "update_archive": "JMAC-2.0-PRODUCCION-1.0.0-ACTUALIZACION.zip",
+  "update_bytes": 626610,
+  "update_sha256": "5786e3917e6b53fcace2298c4c8caa9a5e04793fd1fb321bd8ab83cca43d2193"
+}
