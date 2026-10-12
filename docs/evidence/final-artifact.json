@@ -1,0 +1,8 @@
+{
+  "archive": "JMAC-2.0-CPANEL-REVISION-2026-10-10.zip",
+  "bytes": 19510667,
+  "sha256": "dae3c59440f4681d74fa7ce8cdf0d0f295686a53dc8fb767d0398b0975200b67",
+  "payload_checksums": "PASSED",
+  "runtime_packages": 81,
+  "html_bytes": 2487736
+}

@@ -1,0 +1,22 @@
+
+ GET|HEAD / .. routes/web.php:10
+ GET|HEAD admin .. routes/web.php:25
+ GET|HEAD admin/audit .. routes/web.php:34
+ GET|HEAD admin/forgot-password password.request › Auth\PasswordController…
+ POST admin/forgot-password password.email › Auth\PasswordController@s…
+ GET|HEAD admin/login .. login › Auth\SessionController@create
+ POST admin/login .. Auth\SessionController@store
+ POST admin/logout .. logout › Auth\SessionController@destroy
+ GET|HEAD admin/media .. MediaController@index
+ POST admin/media/upload .. MediaController@store
+ GET|HEAD admin/media/{id}/preview .. MediaController@preview
+ GET|HEAD admin/mfa/challenge mfa.challenge › Auth\MfaController@challenge
+ POST admin/mfa/challenge .. Auth\MfaController@verify
+ GET|HEAD admin/mfa/enroll .. mfa.enroll › Auth\MfaController@enroll
+ POST admin/mfa/enroll .. Auth\MfaController@confirm
+ GET|HEAD admin/pages .. routes/web.php:33
+ POST admin/reset-password password.update › Auth\PasswordController@r…
+ GET|HEAD admin/reset-password/{token} password.reset › Auth\PasswordContr…
+
+ Showing [18] routes
+

@@ -1,0 +1,1 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">@foreach($paths as [$path,$modified])<url><loc>{{ url($path) }}</loc>@if($modified)<lastmod>{{ \Illuminate\Support\Carbon::parse($modified)->toAtomString() }}</lastmod>@endif</url>@endforeach</urlset>

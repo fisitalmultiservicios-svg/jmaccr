@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "status": "DRAFT_PENDING_OWNER_APPROVAL",
+  "brand": {
+    "name": "JMAC",
+    "slogan": "LIDER EN EL MERCADO INDUSTRIAL",
+    "logo": "assets_limpios/logo-jmac.png",
+    "theme_proposal": {
+      "primary": "#174B91",
+      "primary_secondary": "#1C87BB",
+      "foreground": "#18263D",
+      "background": "#FFFFFF",
+      "status": "PROPUESTA_COLOR_BASADA_EN_LOGO_NO_IDENTIDAD_VERIFICADA"
+    },
+    "phone": null,
+    "whatsapp": null,
+    "email": null,
+    "address": null,
+    "social_links": []
+  },
+  "navigation": [
+    {
+      "label": "Inicio",
+      "path": "/"
+    },
+    {
+      "label": "Nosotros",
+      "path": "/nosotros/"
+    },
+    {
+      "label": "Contáctanos",
+      "path": "/contacto/"
+    },
+    {
+      "label": "Novedades",
+      "path": "/novedades/"
+    },
+    {
+      "label": "Catálogo",
+      "path": "/catalogo/"
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "title": "Inicio",
+      "status": "DRAFT",
+      "blocks": [
+        {
+          "type": "hero",
+          "heading": "UN PRODUCTO CON 20 AÑOS DE EXPERIENCIA",
+          "subheading": "Somos líderes gracias a la confianza que cada uno de nuestros clientes nos brinda día a día.",
+          "media": "assets_limpios/portada-fotografia.jpg",
+          "text_source": "sitio corporativo indexado; revisión de redacción"
+        },
+        {
+          "type": "section",
+          "heading": "ORGULLOSAMENTE TICOS",
+          "media": "assets_limpios/orgullosamente-ticos.jpg"
+        },
+        {
+          "type": "text_image",
+          "heading": "Unión de Experiencia, Tecnología y Calidad",
+          "body": "Nuestra propuesta de producto siempre se ha basado en la experiencia adquirida en la venta de productos de línea industrial por más de dos décadas.",
+          "media": "assets_limpios/corporativa-producto.jpg"
+        }
+      ]
+    },
+    {
+      "path": "/nosotros/",
+      "title": "Nosotros",
+      "status": "DRAFT",
+      "blocks": [],
+      "review_note": "CSV no incluye cuerpo. No inventar misión/visión."
+    },
+    {
+      "path": "/contacto/",
+      "title": "Contacto",
+      "status": "DRAFT",
+      "blocks": [
+        {
+          "type": "contact_form",
+          "fields": [
+            "nombre",
+            "telefono",
+            "correo",
+            "mensaje"
+          ]
+        },
+        {
+          "type": "whatsapp_link",
+          "configured": false
+        }
+      ]
+    },
+    {
+      "path": "/novedades/",
+      "title": "Novedades",
+      "status": "DRAFT",
+      "blocks": [
+        {
+          "type": "news_index"
+        }
+      ]
+    },
+    {
+      "path": "/catalogo/",
+      "title": "Catálogo",
+      "status": "DRAFT",
+      "blocks": [
+        {
+          "type": "catalog_category_index",
+          "empty_state": true
+        },
+        {
+          "type": "preorder_cart",
+          "enabled": true
+        }
+      ]
+    }
+  ],
+  "categories": [],
+  "brands": [],
+  "products": [],
+  "blog_posts": [],
+  "orders": [],
+  "customers": [],
+  "reports_portal": {
+    "enabled": false,
+    "status": "PENDING_OWNER_SCOPE"
+  }
+}

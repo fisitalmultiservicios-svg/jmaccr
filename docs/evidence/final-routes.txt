@@ -1,0 +1,128 @@
+
+ GET|HEAD / .. SiteController@page
+ GET|HEAD admin .. routes/web.php:31
+ GET|HEAD admin/audit .. Admin\SystemController@audit
+ GET|HEAD admin/backups .. Admin\BackupController@index
+ POST admin/backups .. Admin\BackupController@create
+ POST admin/backups/import .. Admin\BackupController@import
+ POST admin/backups/key .. Admin\BackupController@key
+ GET|HEAD admin/backups/{name}/download .. Admin\BackupController@download
+ POST admin/backups/{name}/restore .. Admin\BackupController@restore
+ GET|HEAD admin/catalog/brands .. Admin\TaxonomyController@index
+ POST admin/catalog/brands .. Admin\TaxonomyController@save
+ POST admin/catalog/brands/sort .. Admin\TaxonomyController@sort
+ POST admin/catalog/brands/{id} .. Admin\TaxonomyController@save
+ POST admin/catalog/brands/{id}/delete Admin\TaxonomyController@delete
+ GET|HEAD admin/catalog/categories .. Admin\TaxonomyController@index
+ POST admin/catalog/categories .. Admin\TaxonomyController@save
+ POST admin/catalog/categories/sort .. Admin\TaxonomyController@sort
+ POST admin/catalog/categories/{id} .. Admin\TaxonomyController@save
+ POST admin/catalog/categories/{id}/delete Admin\TaxonomyController@de…
+ GET|HEAD admin/catalog/products .. Admin\ProductController@index
+ POST admin/catalog/products .. Admin\ProductController@save
+ GET|HEAD admin/catalog/products/create .. Admin\ProductController@edit
+ POST admin/catalog/products/{id} .. Admin\ProductController@save
+ POST admin/catalog/products/{id}/archive Admin\ProductController@arch…
+ POST admin/catalog/products/{id}/delete Admin\ProductController@delete
+ POST admin/catalog/products/{id}/duplicate Admin\ProductController@du…
+ GET|HEAD admin/catalog/products/{id}/edit .. Admin\ProductController@edit
+ GET|HEAD admin/catalog/products/{id}/preview Admin\ProductController@prev…
+ POST admin/catalog/products/{id}/restore Admin\ProductController@rest…
+ GET|HEAD admin/contacts .. Admin\SalesController@index
+ GET|HEAD admin/contacts/export .. Admin\SalesController@export
+ GET|HEAD admin/contacts/{id} .. Admin\SalesController@show
+ POST admin/contacts/{id} .. Admin\SalesController@update
+ POST admin/contacts/{id}/anonymize .. Admin\SalesController@anonymize
+ GET|HEAD admin/diagnostics .. Admin\SystemController@diagnostics
+ GET|HEAD admin/forgot-password password.request › Auth\PasswordController…
+ POST admin/forgot-password password.email › Auth\PasswordController@s…
+ GET|HEAD admin/login .. login › Auth\SessionController@create
+ POST admin/login .. Auth\SessionController@store
+ POST admin/logout .. logout › Auth\SessionController@destroy
+ GET|HEAD admin/media .. MediaController@index
+ GET|HEAD admin/media/candidates/{name} .. MediaController@candidate
+ POST admin/media/candidates/{name} .. MediaController@importCandidate
+ POST admin/media/upload .. MediaController@store
+ POST admin/media/{id}/approve .. MediaController@approve
+ POST admin/media/{id}/delete .. MediaController@delete
+ GET|HEAD admin/media/{id}/preview .. MediaController@preview
+ POST admin/media/{id}/update .. MediaController@update
+ GET|HEAD admin/menus .. Admin\MenuController@index
+ GET|HEAD admin/menus/{id} .. Admin\MenuController@edit
+ POST admin/menus/{id} .. Admin\MenuController@save
+ POST admin/menus/{id}/publish .. Admin\MenuController@publish
+ POST admin/menus/{id}/rollback .. Admin\MenuController@rollback
+ GET|HEAD admin/mfa/challenge mfa.challenge › Auth\MfaController@challenge
+ POST admin/mfa/challenge .. Auth\MfaController@verify
+ GET|HEAD admin/mfa/enroll .. mfa.enroll › Auth\MfaController@enroll
+ POST admin/mfa/enroll .. Auth\MfaController@confirm
+ GET|HEAD admin/notifications .. Admin\NotificationController@index
+ POST admin/notifications/{id}/retry Admin\NotificationController@retry
+ GET|HEAD admin/pages .. Admin\PageController@index
+ POST admin/pages .. Admin\PageController@create
+ POST admin/pages/{id} .. Admin\PageController@save
+ POST admin/pages/{id}/archive .. Admin\PageController@archive
+ GET|HEAD admin/pages/{id}/edit .. Admin\PageController@edit
+ GET|HEAD admin/pages/{id}/preview .. Admin\PageController@preview
+ POST admin/pages/{id}/preview .. Admin\PageController@preview
+ POST admin/pages/{id}/publish .. Admin\PageController@publish
+ POST admin/pages/{id}/rollback .. Admin\PageController@rollback
+ POST admin/post-categories .. Admin\PostController@category
+ POST admin/post-categories/{id}/delete Admin\PostController@deleteCat…
+ POST admin/post-sections .. Admin\PageController@section
+ GET|HEAD admin/posts .. Admin\PostController@index
+ POST admin/posts .. Admin\PostController@create
+ POST admin/posts/{id} .. Admin\PostController@save
+ POST admin/posts/{id}/archive .. Admin\PostController@archive
+ GET|HEAD admin/posts/{id}/edit .. Admin\PostController@edit
+ GET|POST|HEAD admin/posts/{id}/preview .. Admin\PostController@preview
+ POST admin/posts/{id}/publish .. Admin\PostController@publish
+ POST admin/posts/{id}/rollback .. Admin\PostController@rollback
+ GET|HEAD admin/preorders .. Admin\SalesController@index
+ GET|HEAD admin/preorders/export .. Admin\SalesController@export
+ GET|HEAD admin/preorders/{id} .. Admin\SalesController@show
+ POST admin/preorders/{id} .. Admin\SalesController@update
+ POST admin/preorders/{id}/anonymize .. Admin\SalesController@anonymize
+ POST admin/reset-password password.update › Auth\PasswordController@r…
+ GET|HEAD admin/reset-password/{token} password.reset › Auth\PasswordContr…
+ POST admin/roles .. Admin\UserController@role
+ POST admin/sections .. Admin\PageController@section
+ GET|HEAD admin/seo .. Admin\SeoController@index
+ POST admin/seo .. Admin\SeoController@save
+ POST admin/seo/redirects .. Admin\SeoController@redirect
+ POST admin/seo/redirects/{id}/delete .. Admin\SeoController@delete
+ GET|HEAD admin/settings .. Admin\SettingsController@index
+ POST admin/settings .. Admin\SettingsController@save
+ POST admin/settings/privacy .. Admin\SettingsController@privacy
+ POST admin/settings/smtp .. Admin\SettingsController@smtp
+ POST admin/settings/smtp-test .. Admin\SystemController@smtpTest
+ POST admin/system/automation .. Admin\SystemController@automation
+ POST admin/system/cache .. Admin\SystemController@cache
+ POST admin/system/process .. Admin\SystemController@process
+ GET|HEAD admin/theme .. Admin\ThemeController@index
+ POST admin/theme .. Admin\ThemeController@save
+ POST admin/theme/reset .. Admin\ThemeController@reset
+ POST admin/theme/{id}/publish .. Admin\ThemeController@publish
+ POST admin/theme/{id}/rollback .. Admin\ThemeController@rollback
+ GET|HEAD admin/users .. Admin\UserController@index
+ POST admin/users .. Admin\UserController@create
+ POST admin/users/{id} .. Admin\UserController@save
+ POST admin/users/{id}/invite .. Admin\UserController@invite
+ POST admin/users/{id}/mfa-reset .. Admin\UserController@resetMfa
+ GET|HEAD api/catalog/search .. CatalogController@search
+ POST api/contacts .. RequestController@contact
+ POST api/preorders .. RequestController@preorder
+ GET|HEAD catalogo .. routes/web.php:14
+ GET|HEAD catalogo/{slug} .. CatalogController@show
+ GET|HEAD contacto .. routes/web.php:14
+ GET|HEAD media/{id} .. SiteController@media
+ GET|HEAD nosotros .. routes/web.php:14
+ GET|HEAD novedades .. routes/web.php:14
+ GET|HEAD novedades/{slug} .. PostController@show
+ GET|HEAD politica-de-privacidad .. RequestController@privacy
+ GET|HEAD robots.txt .. SeoController@robots
+ GET|HEAD sitemap.xml .. SeoController@sitemap
+ GET|HEAD {slug} .. SiteController@page
+
+ Showing [124] routes
+

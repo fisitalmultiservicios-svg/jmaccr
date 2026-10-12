@@ -1,0 +1,20 @@
+{
+  "result": "PASSED",
+  "transport": "local HTTP; Chromium managed policy blocks file:// in this cloud",
+  "initial_catalog_empty": true,
+  "media_approval_and_block_save_publish": true,
+  "new_category_brand_product": true,
+  "accent_search_and_cart": true,
+  "local_preorder_and_timeline": true,
+  "persistence_after_reload": true,
+  "keyboard_skip_focus": true,
+  "local_export_restore_and_unsafe_import_rejection": true,
+  "responsive_widths": [
+    360,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "javascript_errors": []
+}

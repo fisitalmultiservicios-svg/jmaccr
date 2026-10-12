@@ -1,0 +1,3 @@
+@extends('layouts.base')
+@section('title','Iniciar sesión · JMAC')
+@section('content')<section class="card narrow"><p class="eyebrow">ADMINISTRACIÓN</p><h1>Bienvenido a JMAC</h1><p>Ingresa con tu cuenta autorizada.</p><form method="post" action="/admin/login">@csrf<label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="username" value="{{ old('email') }}" required maxlength="254"><label for="password">Contraseña</label><input id="password" name="password" type="password" autocomplete="current-password" required><button>Iniciar sesión</button></form><a href="{{ route('password.request') }}">Restablecer contraseña</a></section>@endsection

@@ -1,0 +1,65 @@
+{
+  "environment": "local PHP 8.4.26 / MariaDB 11.8.6; no hosting real",
+  "layouts": [
+    {
+      "document_root": "public",
+      "result": "PASSED",
+      "login_mfa": true,
+      "dashboard_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "draft_pages": 5,
+      "media_upload_private_preview": true,
+      "audit": true,
+      "compiled_assets": 1,
+      "widths": [
+        360,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "private_paths": {
+        "/.env": 404,
+        "/vendor/autoload.php": 404,
+        "/storage/logs/laravel.log": 403,
+        "/.git/config": 404,
+        "/owner-setup.json": 404
+      },
+      "javascript_errors": 0
+    },
+    {
+      "document_root": "archivos_publicos",
+      "result": "PASSED",
+      "login_mfa": true,
+      "dashboard_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "draft_pages": 5,
+      "media_upload_private_preview": true,
+      "audit": true,
+      "compiled_assets": 1,
+      "widths": [
+        360,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "private_paths": {
+        "/.env": 404,
+        "/vendor/autoload.php": 404,
+        "/storage/logs/laravel.log": 403,
+        "/.git/config": 404,
+        "/owner-setup.json": 404
+      },
+      "javascript_errors": 0
+    }
+  ]
+}

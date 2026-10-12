@@ -1,0 +1,25 @@
+{
+  "result": "PASSED",
+  "database": "MariaDB 11.8.6 local",
+  "parallel_workers": 4,
+  "simultaneous_attempts": 10,
+  "unique_preorders": 7,
+  "same_token_attempts": 4,
+  "same_token_records": 1,
+  "sequences": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "smtp_transport": "controlled local SMTP; no external delivery",
+  "smtp_messages_accepted": 7,
+  "outbox_summary": {
+    "sent": 7,
+    "failed": 0,
+    "configuration_pending": 0
+  }
+}

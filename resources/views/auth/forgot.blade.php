@@ -1,0 +1,2 @@
+@extends('layouts.base')
+@section('content')<section class="card narrow"><h1>Restablecer contraseña</h1><p>Requiere SMTP configurado por el administrador del entorno.</p><form method="post" action="{{ route('password.email') }}">@csrf<label for="email">Correo electrónico</label><input type="email" name="email" id="email" required><button>Enviar instrucciones</button></form><a href="/admin/login">Volver al inicio de sesión</a></section>@endsection

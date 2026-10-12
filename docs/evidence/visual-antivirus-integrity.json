@@ -1,0 +1,195 @@
+{
+  "archive": "JMAC-actualizacion-visual.zip",
+  "bytes": 125580,
+  "sha256": "b2aa5dd6feb85d4faf8b6b0c2ab30cccefa297336b06c6671ba363e46f0c6b73",
+  "crc_ok": true,
+  "published_identical": true,
+  "runtime_sources_identical": true,
+  "members": [
+    {
+      "path": "jmac_app/app/Domain/Site/Site.php",
+      "bytes": 2486,
+      "sha256": "12488c3db5b4b0d4fb74e65af98b47b2f37437d8a4c7e19a385409fbb796de97",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/app/Http/Controllers/Admin/ThemeController.php",
+      "bytes": 4600,
+      "sha256": "e2de64c52282e0980cd65453f28acf0e5c86c5e1597273613ec9d3272946c9dc",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/js/admin.js",
+      "bytes": 27020,
+      "sha256": "45d3aaee6752be798e822ef4d99bb764c8ace3d7c6ba2b36cc90f5b15a77eece",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/js/cart.js",
+      "bytes": 5562,
+      "sha256": "5bae0eb0ae2da91f44e4e9d34323a9df7602eb5d79a8cc01b993416818803d48",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/css/app.css",
+      "bytes": 20313,
+      "sha256": "c54d1ed5f2ba7d171b4b025639b9202a3e60ebbf2d3ecb9f3a3f35a4bb734af0",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/components/cart-icon.blade.php",
+      "bytes": 375,
+      "sha256": "d1b0fcf6f814cc9203f7d02008187e71bfb52610ca50149dcccd7758e2759b39",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/components/site-logo.blade.php",
+      "bytes": 350,
+      "sha256": "532d53e4cb179ba534c5859144800957d0355fd3d2eb6c9cb0308bfc6505004b",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/layouts/site.blade.php",
+      "bytes": 3851,
+      "sha256": "712ce4345ead6fa82f625f5b807f486e0ffac024b1ac68d6f2351ce78e0bfe86",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/layouts/admin.blade.php",
+      "bytes": 2791,
+      "sha256": "2f4a7e8983f9c892c8b4793210d14ffa0b230c2f74f6ae1ade4d415cd6eb5ebd",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/layouts/base.blade.php",
+      "bytes": 789,
+      "sha256": "58b48f94696a5ff3197b08ac899ff54a750e971b638438fd6ae30afbffc0d85b",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/site/cart-drawer.blade.php",
+      "bytes": 975,
+      "sha256": "c818386abc08fefbcbaedebb7bef752106aecb358280506fd7a0d69a85199e7a",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/site/product-card.blade.php",
+      "bytes": 657,
+      "sha256": "9900e319d32631cb360c3281b6aa425f34198e38d09c2d938417d59db5923b27",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/site/product.blade.php",
+      "bytes": 2333,
+      "sha256": "663636eed3b0a295e56c23fa709245fc2ef19442b651d41a0ed1d74bd2d4b374",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/admin/page-editor.blade.php",
+      "bytes": 5991,
+      "sha256": "2794dc87c6c959a8f3d346dbb63aac0a388ee9c0ced559e02da9f68d5af48346",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/admin/theme.blade.php",
+      "bytes": 5035,
+      "sha256": "adfac6cdcada06008039e7f6db9a3cbe364fe6ba7df11f0f21d8b4db93f14bfe",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/admin/dashboard.blade.php",
+      "bytes": 2068,
+      "sha256": "ca4d2d970e38bff3b8a64f0a9c1c4df79aca354c2c92e92fcbfdbf46bc3147ce",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/resources/views/admin/pages.blade.php",
+      "bytes": 1210,
+      "sha256": "074d4b34c3fd73fe6e0f55d530a2d87acccb5378ee71c4a538f1643012ad0fb9",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/docs/ADMIN_MANUAL.md",
+      "bytes": 3473,
+      "sha256": "213d43d25a499c0701ef78c063245ee8a14d35eba7b829d758109a22adec77c6",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/docs/ACTUALIZACION_VISUAL.md",
+      "bytes": 4831,
+      "sha256": "996aaa94a14926d531f25c249c72b61ae43ed70f8de2ed538bc4ec7b077e2de7",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/public/build/assets/app-B9eZnYus.js",
+      "bytes": 28466,
+      "sha256": "aeef49f861eb9f5be65dfcf28f7c1e594b59853f348441d4cba0fce416a9b18d",
+      "source_identical": true
+    },
+    {
+      "path": "public_html/build/assets/app-B9eZnYus.js",
+      "bytes": 28466,
+      "sha256": "aeef49f861eb9f5be65dfcf28f7c1e594b59853f348441d4cba0fce416a9b18d",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/public/build/assets/app-O1-jpzL0.css",
+      "bytes": 26357,
+      "sha256": "3c32b6d78953394dd939420453a547d62faff297be91b13e6349960d7b3fc07e",
+      "source_identical": true
+    },
+    {
+      "path": "public_html/build/assets/app-O1-jpzL0.css",
+      "bytes": 26357,
+      "sha256": "3c32b6d78953394dd939420453a547d62faff297be91b13e6349960d7b3fc07e",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/public/build/manifest.json",
+      "bytes": 331,
+      "sha256": "c783c252d6d99915772b298d5745d76d8a6087d0a267d9fbe26c1430103a53be",
+      "source_identical": true
+    },
+    {
+      "path": "public_html/build/manifest.json",
+      "bytes": 331,
+      "sha256": "c783c252d6d99915772b298d5745d76d8a6087d0a267d9fbe26c1430103a53be",
+      "source_identical": true
+    },
+    {
+      "path": "jmac_app/public/brand/jmac-logo.png",
+      "bytes": 27922,
+      "sha256": "a339683a62c4448e5e7ca594e83744c9d65082bafcd0332363c9ec9aebf9651d",
+      "source_identical": true
+    },
+    {
+      "path": "public_html/brand/jmac-logo.png",
+      "bytes": 27922,
+      "sha256": "a339683a62c4448e5e7ca594e83744c9d65082bafcd0332363c9ec9aebf9651d",
+      "source_identical": true
+    },
+    {
+      "path": "LEEME_ACTUALIZACION_VISUAL.txt",
+      "bytes": 4831,
+      "sha256": "996aaa94a14926d531f25c249c72b61ae43ed70f8de2ed538bc4ec7b077e2de7",
+      "source_identical": true
+    }
+  ],
+  "antivirus_status": "NOT_SCANNED_DATABASE_DOWNLOAD_BLOCKED",
+  "hosting_detection": "Sanesecurity.Foxhole.JS_Zip_20.UNOFFICIAL",
+  "antivirus_engine_available": "ClamAV 1.4.3",
+  "antivirus_definitions_available": false,
+  "antivirus_result": "NOT_EXECUTED; no verdict of clean or infected",
+  "definition_download_blockers": [
+    "database.clamav.net: proxy HTTP 403",
+    "sanesecurity.com: proxy HTTP 403"
+  ],
+  "rebuild_command": "source /workspace/toolchain/activate && npm run build",
+  "rebuild_result": "PASSED; JS, CSS and manifest byte-identical to the blocked archive",
+  "code_changes": false,
+  "migrations": 0,
+  "hosting_update_applied": false,
+  "signature_context_reference": "https://github.com/extremeshok/clamav-unofficial-sigs/blob/948a1fb84c15a71910456561cec384a978b13412/config/master.conf#L232",
+  "signature_definition_verified": false,
+  "interpretation": "Possible archive/JavaScript rule match; false-positive status unconfirmed. Hosting must analyze the exact file and signature."
+}

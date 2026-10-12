@@ -1,0 +1,1 @@
+Browser: login, MFA enrollment, recovery login, dashboard 0, five drafts, 5 widths without overflow, 4 private paths denied (403 or 404): PASSED

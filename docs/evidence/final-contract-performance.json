@@ -1,0 +1,20 @@
+{
+  "result": "PASSED",
+  "environment": "disposable local DB, production SEO mode simulated; no production hosting touched",
+  "sitemap_only_published": true,
+  "robots_public_mode": true,
+  "category_image_rendered": true,
+  "news_publish_withdrawal_detail": true,
+  "new_fixtures": 1000,
+  "public_records": 999,
+  "pagination_size": 12,
+  "http_response_ms": [
+    427.25,
+    570.15,
+    538.49,
+    302.1,
+    309.8
+  ],
+  "mean_ms": 429.56,
+  "Lighthouse": "not run; local timing is not a hosting metric"
+}

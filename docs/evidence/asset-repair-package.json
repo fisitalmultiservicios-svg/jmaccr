@@ -1,0 +1,58 @@
+{
+  "archive": "JMAC-reparacion-estilos-logo.zip",
+  "bytes": 70385,
+  "sha256": "aaaded2f18ca043378528cbac2287981fb33cee812ab68011d49aebabbc78592",
+  "file_checksums": {
+    "public_html/build/assets/app-O1-jpzL0.css": "3c32b6d78953394dd939420453a547d62faff297be91b13e6349960d7b3fc07e",
+    "public_html/build/manifest.json": "c783c252d6d99915772b298d5745d76d8a6087d0a267d9fbe26c1430103a53be",
+    "public_html/brand/jmac-logo.png": "a339683a62c4448e5e7ca594e83744c9d65082bafcd0332363c9ec9aebf9651d",
+    "jmac_app/public/build/assets/app-O1-jpzL0.css": "3c32b6d78953394dd939420453a547d62faff297be91b13e6349960d7b3fc07e",
+    "jmac_app/public/build/manifest.json": "c783c252d6d99915772b298d5745d76d8a6087d0a267d9fbe26c1430103a53be",
+    "jmac_app/public/brand/jmac-logo.png": "a339683a62c4448e5e7ca594e83744c9d65082bafcd0332363c9ec9aebf9651d",
+    "LEEME_REPARACION_ESTILOS.txt": "29b2d7a3f112e0bfdf725e736f946305002cae0d1b575cd28243d9d39b1d8826"
+  },
+  "file_permissions": "0644",
+  "directory_permissions": "0755",
+  "javascript_in_archive": false,
+  "runtime_code_changes": false,
+  "migrations": 0,
+  "hosting_applied": false,
+  "hosting_antivirus_acceptance": "NOT_VERIFIED",
+  "native_unzip_regression": {
+    "result": "PASSED",
+    "native_unzip": true,
+    "old_css_logo_0600_reproduced": true,
+    "corrected_files_readable_by_static_server": true,
+    "archive_directory_metadata_0755": true,
+    "native_unzip_preserves_existing_directory_permissions": true,
+    "documented_manual_directory_0755_fallback_tested": true,
+    "private_env_storage_root_index_mfa_unchanged": true,
+    "all_payload_checksums_match": true,
+    "both_manifests_resolve": true
+  },
+  "browser": {
+    "result": "PASSED",
+    "logo_clean_asset_loaded": true,
+    "default_footer_credit": true,
+    "drawer_empty_open_escape_focus": true,
+    "cart_quantity_remove_persistence": true,
+    "page_click_select_save_reload": true,
+    "new_block_style_persists": true,
+    "draft_isolation": true,
+    "unsaved_publication_prevented": true,
+    "theme_credit_preview_save_publish": true,
+    "responsive_widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440
+    ],
+    "javascript_errors": [],
+    "database": "jmac_visual_test",
+    "database_removed": true
+  },
+  "css_computed_style_assertions": "PASSED",
+  "corrected_full_distribution_permissions": "PASSED",
+  "protected_files_and_permissions_unchanged": "PASSED"
+}

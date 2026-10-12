@@ -1,0 +1,10 @@
+categories: 0
+brands: 0
+products: 0
+product_media: 0
+preorders: 0
+preorder_items: 0
+contact_submissions: 0
+posts: 0
+post_categories: 0
+pages published: 0

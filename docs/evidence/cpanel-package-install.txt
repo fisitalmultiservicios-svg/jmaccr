@@ -1,0 +1,26 @@
+Instalación terminada. Archivo privado eliminado, catálogo vacío y MFA obligatorio. Retira este Cron.
+La instalación ya se completó. No se modificaron la clave ni las cuentas. Retira este Cron.
+categories: 0
+brands: 0
+products: 0
+product_media: 0
+preorders: 0
+preorder_items: 0
+contact_submissions: 0
+posts: 0
+post_categories: 0
+pages published: 0
+PHP 8.4.26
+pdo_mysql: OK
+mbstring: OK
+openssl: OK
+fileinfo: OK
+curl: OK
+dom: OK
+zip: OK
+gd: OK
+intl: OK
+DB: conectada
+storage writable: sí
+
+Repetición: configuración privada intacta y archivo de contraseña ausente: PASSED

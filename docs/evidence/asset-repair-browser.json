@@ -1,0 +1,22 @@
+{
+  "result": "PASSED",
+  "logo_clean_asset_loaded": true,
+  "default_footer_credit": true,
+  "drawer_empty_open_escape_focus": true,
+  "cart_quantity_remove_persistence": true,
+  "page_click_select_save_reload": true,
+  "new_block_style_persists": true,
+  "draft_isolation": true,
+  "unsaved_publication_prevented": true,
+  "theme_credit_preview_save_publish": true,
+  "responsive_widths": [
+    360,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "javascript_errors": [],
+  "database": "jmac_visual_test",
+  "database_removed": true
+}

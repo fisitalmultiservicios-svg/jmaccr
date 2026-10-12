@@ -1,0 +1,4 @@
+# Hito 7 · entrega local para staging
+Artefactos: HTML único JMAC-2.0-VISTA-PREVIA.html y ZIP integral cPanel con código, vendor runtime/build, loader público alternativo, manuales/checksums y revisión local. Ceros en instalación, sin claves/usuarios/runtime/backup viejo.
+64 pruebas/431 aserciones por motor; contratos SEO/categoría-imagen/retirada-blog/1k con HTTP local medio 429.56ms, Pint/audits/build/navegador. HTML interactivo revisado en cinco anchos; sus operaciones son locales y no simula entrega a ventas. Prueba de paquete limpio documentada en final-package-smoke.json. Manifiesto SHA256/CRC y escaneo de exclusiones al finalizar.
+No cPanel real/T048/Lighthouse/WCAG completo aprobados. Instalación PHP8.3/DB/SMTP/SSL/Cron del dueño pendiente; no se cambió producción. Sigue INSTALL_CPANEL y QA_MATRIX. Reportes H2–H6 muestran cambios/migraciones/rutas/tests/pendientes y pasos para probar.

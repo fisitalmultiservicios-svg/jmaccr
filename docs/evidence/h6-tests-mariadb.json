@@ -1,0 +1,10 @@
+{
+  "tests": 64,
+  "assertions": 426,
+  "failures": [
+    {
+      "test": "test_theme_revisions_publish_and_rollback_are_independent",
+      "reason": "Tests\\Feature\\CmsTest::test_theme_revisions_publish_and_rollback_are_independent\nExpected response status code [201, 301, 302, 303, 307, 308] but received 404.\nFailed asserting that false is true.\n\n/workspace/jmaccr/vendor/laravel/framework/src/Illuminate/Testing/TestResponseAssert.php:46\n/workspace"
+    }
+  ]
+}
