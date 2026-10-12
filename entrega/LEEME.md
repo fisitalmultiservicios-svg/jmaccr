@@ -1,5 +1,16 @@
 # JMAC 2.0 — versión oficial 1.0.0
 
+## Corrección posterior: eliminar el hueco del catálogo
+
+[Descargar JMAC-ajuste-espacio-catalogo.zip (20 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-ajuste-espacio-catalogo.zip).
+
+Después de instalar la versión oficial 1.0.0, sube este parche a /home/jmaccr, extráelo allí y pulsa Sistema → Diagnóstico → Vaciar caché; recarga Catálogo con Ctrl+F5. Elimina el título automático y los bloques técnicos vacíos de la página publicada. Catálogo, búsqueda y carrito quedan debajo del menú con 24 px de separación. No cambia la base de datos, Excel, configuración, usuarios ni JavaScript. No repitas el instalador.
+
+[Manual](actualizaciones/espacio-catalogo/LEEME.md) · [Evidencia](actualizaciones/espacio-catalogo/EVIDENCIA.json) · [Capturas reales](actualizaciones/espacio-catalogo/capturas/).
+
+Probado el ZIP real sobre el integral oficial con unzip nativo: archivos privados conservados, CSS/manifiestos resueltos, cinco anchos y catálogo vacío/con producto nuevo; carrito real, sin errores JS, base QA eliminada. Aplicación por el propietario pendiente. El código fuente de la rama oficial ya incluye la corrección; los ZIP 1.0.0 anteriores se conservan y requieren aplicar este parche después.
+
+
 Preparada el 12 de octubre de 2026. El propietario aprobó el diseño reparado y solicitó la retirada del banner de cuatro páginas y la importación Excel; esta versión implementa ambos.
 
 ## Tu instalación actual: actualizar sin reinstalar
