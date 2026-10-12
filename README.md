@@ -4,6 +4,8 @@ Versión oficial del software **1.0.0**, preparada el 12 de octubre de 2026. App
 
 El propietario aprobó el diseño reparado y solicitó esta versión. [Actualización e instalación oficial](docs/PRODUCCION_1_0.md), [productos desde Excel](docs/IMPORTACION_EXCEL.md) y [estado/evidencias](docs/STATUS.md). La actualización conserva la instalación existente y no necesita nuevas migraciones. La publicación DNS, SMTP y QA del hosting no se verificaron remotamente.
 
+Inventario con **Nombre, Descripción, Categoría, Imagen, SKU** y fotos incrustadas: [actualización y límites PHP](docs/EXCEL_CON_FOTOGRAFIAS.md).
+
 Corrección posterior de la página publicada: [quitar el espacio vacío del catálogo](docs/AJUSTE_CATALOGO.md). El parche se aplica después del paquete oficial 1.0.0; el código fuente de esta rama ya incorpora el ajuste.
 
 Sin WordPress/importación vieja/pagos. Cero productos/categorías/marcas/artículos/solicitudes/usuarios iniciales, sin contraseña default. Semilla DRAFT/fotos candidatas y contactos/legal pendientes. No modifica producción automáticamente.

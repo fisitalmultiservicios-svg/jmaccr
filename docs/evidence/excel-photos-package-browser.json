@@ -1,0 +1,36 @@
+{
+  "result": "PASSED",
+  "mode": "packaged",
+  "headers": [
+    "Nombre",
+    "Descripci\u00f3n",
+    "Categor\u00eda",
+    "Imagen",
+    "SKU"
+  ],
+  "large_upload_bytes": 37794674,
+  "automatic_chunk_preparation": true,
+  "preview_does_not_create_products": true,
+  "photos_approved_explicitly": true,
+  "append_and_replace_real_forms": true,
+  "public_images_loaded": true,
+  "cart_real": true,
+  "viewport_widths": [
+    360,
+    390,
+    768,
+    1303,
+    1440
+  ],
+  "javascript_errors": [],
+  "final_counts": {
+    "active": 2,
+    "retired": 12,
+    "published": 2,
+    "images": 14,
+    "preorders": 0
+  },
+  "owner_attachment_full_file_tested": false,
+  "environment": "local PHP 8.4 / MariaDB; no remote cPanel access",
+  "database_removed": true
+}

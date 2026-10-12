@@ -19,9 +19,9 @@ final class ExcelCatalog
 {
     public const MAX_ROWS = 2000;
 
-    public const HEADERS = ['SKU', 'Nombre', 'Categoría', 'Marca', 'Resumen', 'Descripción', 'Unidad', 'Estado', 'Existencias', 'Precio interno', 'Etiquetas'];
+    public const HEADERS = ['Nombre', 'Descripción', 'Categoría', 'Imagen', 'SKU'];
 
-    private const COLUMNS = ['sku' => 'sku', 'codigo' => 'sku', 'nombre' => 'name', 'categoria' => 'category', 'marca' => 'brand', 'resumen' => 'summary', 'descripcion' => 'description', 'unidad' => 'unit', 'estado' => 'status', 'existencias' => 'stock', 'stock' => 'stock', 'precio interno' => 'private_price_crc', 'etiquetas' => 'tags_text'];
+    private const COLUMNS = ['sku' => 'sku', 'codigo' => 'sku', 'nombre' => 'name', 'categoria' => 'category', 'marca' => 'brand', 'resumen' => 'summary', 'descripcion' => 'description', 'unidad' => 'unit', 'estado' => 'status', 'existencias' => 'stock', 'stock' => 'stock', 'precio interno' => 'private_price_crc', 'etiquetas' => 'tags_text', 'imagen' => 'image'];
 
     public function directory(): string
     {
@@ -40,28 +40,44 @@ final class ExcelCatalog
 
     private function inspect(string $path): void
     {
+        if (! is_file($path) || filesize($path) > CatalogFileLimits::MAX_BYTES) {
+            $this->fail('El Excel supera el límite de 128 MB.');
+        }
         $zip = new ZipArchive;
         if ($zip->open($path, ZipArchive::CHECKCONS) !== true) {
             $this->fail('El archivo no es un Excel .xlsx válido.');
         }
         try {
-            if ($zip->numFiles > 250 || $zip->locateName('xl/workbook.xml') === false) {
+            if ($zip->numFiles > 8192 || $zip->locateName('xl/workbook.xml') === false) {
                 $this->fail('Usa un Excel sencillo basado en la plantilla JMAC.');
             }
-            $total = 0;
+            $total = $xmlTotal = 0;
+            $names = [];
             for ($index = 0; $index < $zip->numFiles; $index++) {
                 $entry = $zip->statIndex($index);
                 $name = $entry['name'];
                 $total += $entry['size'];
-                if ($total > 16 * 1024 * 1024 || $entry['size'] > 10 * 1024 * 1024 || str_contains($name, '..') || str_contains($name, '\\') || str_starts_with($name, '/') || ($entry['encryption_method'] ?? 0) !== 0 || preg_match('~(?:vbaProject|externalLinks|embeddings|connections\.xml)|\.(?:bin|php|js|exe|svg)$~i', $name)) {
+                if (isset($names[$name])) {
+                    $this->fail('El Excel contiene partes internas repetidas.');
+                }
+                $names[$name] = true;
+                if ($total > 256 * 1024 * 1024 || $entry['size'] > 10 * 1024 * 1024 || str_contains($name, '..') || str_contains($name, '\\') || str_starts_with($name, '/') || ($entry['encryption_method'] ?? 0) !== 0 || preg_match('~(?:vbaProject|externalLinks|embeddings|connections\.xml)|\.(?:bin|php|js|exe|svg)$~i', $name)) {
                     $this->fail('Excel demasiado grande o con contenido activo. Usa la plantilla sin macros, vínculos externos ni objetos incrustados.');
                 }
                 if (! preg_match('/\.(xml|rels|vml)$/i', $name)) {
-                    if (! str_ends_with($name, '/') && ! preg_match('/\.(png|jpe?g)$/i', $name)) {
+                    if (! str_ends_with($name, '/') && ! preg_match('/\.(png|jpe?g|webp|avif)$/i', $name)) {
                         $this->fail('El Excel incluye objetos o archivos no permitidos. Usa la plantilla JMAC.');
                     }
 
+                    if (! str_ends_with($name, '/') && $entry['size'] > 8 * 1024 * 1024) {
+                        $this->fail('Una fotografía excede los 8 MB; comprímela antes de subir el Excel.');
+                    }
+
                     continue;
+                }
+                $xmlTotal += $entry['size'];
+                if ($xmlTotal > 16 * 1024 * 1024) {
+                    $this->fail('Los datos XML del libro superan 16 MB. Divide el Excel en partes.');
                 }
                 $xml = $zip->getFromIndex($index, 10 * 1024 * 1024 + 1);
                 if ($xml === false || strlen($xml) !== $entry['size'] || ! mb_check_encoding($xml, 'UTF-8') || str_contains($xml, "\0") || preg_match('/<!\s*(?:DOCTYPE|ENTITY)/i', $xml) || (str_starts_with($name, 'xl/worksheets/') && preg_match('/<(?:[\w]+:)?f(?:\s|>)/', $xml))) {
@@ -145,6 +161,7 @@ final class ExcelCatalog
     {
         $this->inspect($path);
         $options = new ReaderOptions;
+        $options->SHOULD_PRESERVE_EMPTY_ROWS = true;
         $options->setTempFolder($this->directory());
         $reader = new Reader($options);
         $rows = $errors = $seen = [];
@@ -201,7 +218,7 @@ final class ExcelCatalog
                     if (! empty($fields['private_price_crc'])) {
                         $fields['private_price_crc'] = str_replace(',', '.', $fields['private_price_crc']);
                     }
-                    $validation = Validator::make($fields, ['sku' => ['required', 'string', 'max:100', 'regex:/^[A-Z0-9][A-Z0-9 ._+\/\-]*$/'], 'name' => 'required|string|max:180', 'category' => 'nullable|string|max:180', 'brand' => 'nullable|string|max:180', 'summary' => 'nullable|string|max:2000', 'description' => 'nullable|string|max:6000', 'unit' => 'sometimes|required|string|max:50', 'status' => 'sometimes|required|in:draft,published,hidden,archived', 'stock' => 'nullable|integer|min:0|max:99999999', 'private_price_crc' => 'nullable|numeric|min:0|max:999999999999', 'tags_text' => 'nullable|string|max:1000']);
+                    $validation = Validator::make($fields, ['sku' => ['required', 'string', 'max:100', 'regex:/^[A-Z0-9][A-Z0-9 ._+\/\-]*$/'], 'name' => 'required|string|max:180', 'category' => 'nullable|string|max:180', 'brand' => 'nullable|string|max:180', 'summary' => 'nullable|string|max:2000', 'description' => 'nullable|string|max:6000', 'unit' => 'sometimes|required|string|max:50', 'status' => 'sometimes|required|in:draft,published,hidden,archived', 'stock' => 'nullable|integer|min:0|max:99999999', 'private_price_crc' => 'nullable|numeric|min:0|max:999999999999', 'tags_text' => 'nullable|string|max:1000', 'image' => 'nullable|string|max:2000']);
                     $validation->setAttributeNames(['sku' => 'SKU', 'name' => 'Nombre', 'category' => 'Categoría', 'brand' => 'Marca', 'summary' => 'Resumen', 'description' => 'Descripción', 'unit' => 'Unidad', 'status' => 'Estado', 'stock' => 'Existencias', 'private_price_crc' => 'Precio interno', 'tags_text' => 'Etiquetas']);
                     if ($validation->fails()) {
                         $errors[] = ['row_number' => $line, 'safe_error' => implode(' ', $validation->errors()->all())];
@@ -229,6 +246,21 @@ final class ExcelCatalog
             $this->fail('El Excel está vacío. Añade al menos un producto nuevo; no se reemplaza el catálogo con una hoja vacía.');
         }
 
+        $pictures = [];
+        $imageColumn = $columns !== null ? array_search('image', $columns, true) : false;
+        if ($imageColumn !== false && $errors === []) {
+            $pictures = app(ExcelPictures::class)->map($path, $imageColumn, array_fill_keys(array_column($rows, 'line'), true));
+        }
+        foreach ($rows as &$row) {
+            $text = $row['fields']['image'] ?? null;
+            unset($row['fields']['image']);
+            $row['photos'] = $pictures[$row['line']] ?? [];
+            if ($text && $row['photos'] === []) {
+                $errors[] = ['row_number' => $row['line'], 'safe_error' => 'Imagen debe contener una fotografía incrustada, no un enlace o nombre de archivo. No se realizan descargas externas.'];
+            }
+        }
+        unset($row);
+
         return ['rows' => $rows, 'errors' => $errors];
     }
 
@@ -242,9 +274,9 @@ final class ExcelCatalog
         try {
             $writer->getCurrentSheet()->setName('Productos')->setColumnWidth(24, ...range(1, count(self::HEADERS)));
             $writer->addRow(Row::fromValues(self::HEADERS, (new Style)->setFontBold()->setFontColor('FFFFFF')->setBackgroundColor('174B91')));
-            $writer->addRow(Row::fromValuesWithStyles(array_fill(0, count(self::HEADERS), ''), columnStyles: [0 => (new Style)->setFormat('@')]));
+            $writer->addRow(Row::fromValuesWithStyles(array_fill(0, count(self::HEADERS), ''), columnStyles: [4 => (new Style)->setFormat('@')]));
             $writer->addNewSheetAndMakeItCurrent()->setName('Instrucciones');
-            foreach (['JMAC 2.0 — catálogo nuevo', 'Completa la primera hoja Productos. No borres ni dupliques los encabezados.', 'SKU y Nombre son obligatorios. Formatea SKU como Texto para conservar ceros iniciales.', 'Máximo 2.000 productos y archivo de 5 MB. Solo valores: sin fórmulas, macros ni vínculos externos.', 'Estado: borrador, publicado, oculto o archivado. Vacío significa borrador.', 'Precio interno es privado; no se publican precios ni se cobran pagos.', 'Sumar: agrega códigos nuevos y actualiza los existentes; una columna omitida conserva su valor anterior.', 'Reemplazar: deja activo solo el Excel y retira a papelera los códigos ausentes. Conserva preventas e imágenes de los SKU coincidentes.', 'Categoría y Marca crean agrupaciones nuevas desde esta hoja; no se importan imágenes.', 'No utilices el CSV histórico ni exportaciones del WordPress anterior.'] as $instruction) {
+            foreach (['JMAC 2.0 — catálogo nuevo', 'Completa la primera hoja Productos. No borres ni dupliques los encabezados.', 'SKU y Nombre son obligatorios. Formatea SKU como Texto para conservar ceros iniciales.', 'Máximo 2.000 productos y archivo de 128 MB, sujeto al límite PHP del hosting. Sin fórmulas, macros ni vínculos externos.', 'Estado: borrador, publicado, oculto o archivado. Vacío significa borrador.', 'Precio interno es privado; no se publican precios ni se cobran pagos.', 'Sumar: agrega códigos nuevos y actualiza los existentes; una columna omitida conserva su valor anterior.', 'Reemplazar: deja activo solo el Excel y retira a papelera los códigos ausentes. Conserva preventas e imágenes de los SKU coincidentes.', 'Pega fotografías en la columna Imagen y en la fila del SKU: se procesan como candidatos privados hasta su aprobación.', 'No utilices el CSV histórico ni exportaciones del WordPress anterior.'] as $instruction) {
                 $writer->addRow(Row::fromValues([$instruction]));
             }
         } finally {

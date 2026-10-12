@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Domain\Catalog\CatalogFileLimits;
+use App\Domain\Catalog\CatalogImportPhotos;
 use App\Domain\Catalog\CatalogImports;
 use App\Domain\Catalog\ExcelCatalog;
 use App\Http\Controllers\Controller;
@@ -20,7 +22,7 @@ class CatalogImportController extends Controller
         $this->authorizeImport($request);
         $imports->cleanup();
 
-        return view('admin.catalog-import', ['canReplace' => CatalogImports::canReplace($request->user()), 'batches' => DB::table('import_batches')->where('actor_id', $request->user()->id)->orderByDesc('id')->paginate(20)]);
+        return view('admin.catalog-import', ['limits' => CatalogFileLimits::summary(), 'canReplace' => CatalogImports::canReplace($request->user()), 'batches' => DB::table('import_batches')->where('actor_id', $request->user()->id)->orderByDesc('id')->paginate(20)]);
     }
 
     public function template(Request $request, ExcelCatalog $excel)
@@ -33,7 +35,7 @@ class CatalogImportController extends Controller
     public function preview(Request $request, CatalogImports $imports)
     {
         $this->authorizeImport($request);
-        $data = $request->validate(['file' => 'required|file|extensions:xlsx|max:5120', 'mode' => 'required|in:append,replace', 'new_catalog' => 'accepted']);
+        $data = $request->validate(['file' => 'required|file|extensions:xlsx|max:131072', 'mode' => 'required|in:append,replace', 'new_catalog' => 'accepted']);
         $id = $imports->preview($request->file('file'), $data['mode'], $request->user());
 
         return redirect('/admin/catalog/imports/'.$id);
@@ -57,15 +59,32 @@ class CatalogImportController extends Controller
         $page = $request->validate(['page' => 'nullable|integer|min:1|max:40'])['page'] ?? 1;
         $rows = $batch->status === 'ready' ? array_slice($imports->rows($batch), ($page - 1) * 50, 50) : [];
 
-        return view('admin.catalog-import-preview', ['batch' => $batch, 'mapping' => $mapping, 'counts' => $counts, 'rows' => $rows, 'pageNumber' => (int) $page, 'errorsList' => DB::table('import_errors')->where('import_batch_id', $id)->orderBy('row_number')->paginate(50)]);
+        return view('admin.catalog-import-preview', ['batch' => $batch, 'mapping' => $mapping, 'counts' => $counts, 'rows' => $rows, 'pageNumber' => (int) $page, 'canApprovePhotos' => $request->user()->hasPermission('media.approve'), 'canPublishProducts' => $request->user()->hasPermission('products.publish'), 'errorsList' => DB::table('import_errors')->where('import_batch_id', $id)->orderBy('row_number')->paginate(50)]);
+    }
+
+    public function prepare(Request $request, int $id, CatalogImports $imports)
+    {
+        $this->batch($request, $id);
+        $imports->preparePhotos($id, $request->user());
+
+        return redirect('/admin/catalog/imports/'.$id);
+    }
+
+    public function photo(Request $request, int $id, int $index, CatalogImportPhotos $photos)
+    {
+        $batch = $this->batch($request, $id);
+        abort_unless($batch->status === 'ready' && $request->user()->hasPermission('media.create'), 404);
+        $image = $photos->image(json_decode($batch->mapping, true), $index);
+
+        return response($image['thumb_bytes'], 200, ['Content-Type' => 'image/webp', 'Cache-Control' => 'private, no-store', 'X-Content-Type-Options' => 'nosniff']);
     }
 
     public function apply(Request $request, int $id, CatalogImports $imports)
     {
         $batch = $this->batch($request, $id);
         $mode = json_decode($batch->mapping, true)['mode'];
-        $request->validate(['confirm' => 'accepted', 'phrase' => $mode === 'replace' ? 'required|in:REEMPLAZAR' : 'nullable|string|max:30']);
-        $imports->apply($id, $request->user());
+        $request->validate(['confirm' => 'accepted', 'phrase' => $mode === 'replace' ? 'required|in:REEMPLAZAR' : 'nullable|string|max:30', 'approve_photos' => 'sometimes|accepted', 'publish_products' => 'sometimes|accepted']);
+        $imports->apply($id, $request->user(), $request->boolean('approve_photos'), $request->boolean('publish_products'));
 
         return redirect('/admin/catalog/imports/'.$id)->with('status', 'Importación terminada. El catálogo se guardó y el histórico de preventas se conserva.');
     }

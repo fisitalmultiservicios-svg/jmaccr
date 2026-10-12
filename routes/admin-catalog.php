@@ -10,9 +10,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin/catalog')->group(function ()
     Route::middleware('permission:products.view')->group(function () {
         Route::get('/imports', [CatalogImportController::class, 'index']);
         Route::get('/imports/template', [CatalogImportController::class, 'template']);
-        Route::post('/imports', [CatalogImportController::class, 'preview'])->middleware('throttle:3,1');
+        Route::post('/imports', [CatalogImportController::class, 'preview'])->middleware('throttle:3,1,catalog-import-upload:');
         Route::get('/imports/{id}', [CatalogImportController::class, 'show'])->whereNumber('id');
-        Route::post('/imports/{id}/apply', [CatalogImportController::class, 'apply'])->whereNumber('id')->middleware('throttle:5,1');
+        Route::post('/imports/{id}/prepare', [CatalogImportController::class, 'prepare'])->whereNumber('id')->middleware('throttle:120,1,catalog-import-photos:');
+        Route::get('/imports/{id}/photos/{index}', [CatalogImportController::class, 'photo'])->whereNumber('id')->whereNumber('index');
+        Route::post('/imports/{id}/apply', [CatalogImportController::class, 'apply'])->whereNumber('id')->middleware('throttle:5,1,catalog-import-apply:');
         Route::post('/imports/{id}/cancel', [CatalogImportController::class, 'cancel'])->whereNumber('id');
     });
     foreach (['categories', 'brands'] as $resource) {

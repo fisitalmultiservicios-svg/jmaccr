@@ -2,9 +2,9 @@
 
 En **Catálogo → Productos y especificaciones**, pulsa **Cargar productos desde Excel**. Descarga la plantilla, completa la primera hoja y pulsa **Analizar Excel**. La plantilla contiene encabezados e instrucciones, cero productos.
 
-SKU y Nombre son obligatorios. Las columnas admitidas son SKU (o Código), Nombre, Categoría, Marca, Resumen, Descripción, Unidad, Estado, Existencias, Precio interno y Etiquetas. SKU se guarda en mayúsculas y debe estar en formato Texto en Excel para conservar sus ceros iniciales. No se importan fotografías, PDF ni direcciones externas: los medios se administran y aprueban en el panel.
+SKU y Nombre son obligatorios. Las columnas admitidas son SKU (o Código), Nombre, Categoría, Marca, Resumen, Descripción, Unidad, Estado, Existencias, Precio interno, Etiquetas e Imagen. SKU se guarda en mayúsculas y debe estar en formato Texto en Excel para conservar sus ceros iniciales. Imagen admite fotografías incrustadas, asociadas por fila y SKU; se reprocesan y requieren aprobación. No se importan PDF ni direcciones externas. Guía en EXCEL_CON_FOTOGRAFIAS.md.
 
-El límite es 5 MB, 2.000 filas de productos y 30 columnas, con máximo 16 MB descomprimidos. Se rechazan filas duplicadas por SKU, fórmulas, macros, entidades XML, relaciones externas, libros mal formados y dimensiones excesivas. Usa `.xlsx` y pega solo valores. Se lee únicamente la primera hoja. No se admiten `.xls`, `.xlsm` ni CSV históricos; el archivo debe contener información nueva de JMAC 2.0.
+El límite es 128 MB sujeto a PHP, 2.000 filas de productos y 30 columnas, con máximo 256 MB descomprimidos y 16 MB de XML. Se rechazan filas duplicadas por SKU, fórmulas, macros, entidades XML, relaciones externas, libros mal formados y dimensiones excesivas. Usa `.xlsx` y pega solo valores. Se lee únicamente la primera hoja. No se admiten `.xls`, `.xlsm` ni CSV históricos; el archivo debe contener información nueva de JMAC 2.0.
 
 ## Sumar al catálogo
 
@@ -20,10 +20,10 @@ La revisión muestra Nuevos, Actualizados, Restaurados, Retirados y Errores. Si 
 
 ## Publicación y permisos
 
-Estado admite borrador, publicado, oculto o archivado. Publicado exige permiso `products.publish`. Crear o actualizar agrupaciones requiere sus permisos correspondientes; sus medios y los de productos coincidentes deben estar aprobados antes de publicar. Se puede confirmar un archivo en borrador y publicar después desde las fichas.
+Estado admite borrador, publicado, oculto o archivado. Publicado exige permiso `products.publish`. Crear o actualizar agrupaciones requiere sus permisos correspondientes; cargar fotografías exige media.create y aprobar su uso exige media.approve; sus medios y los de productos coincidentes deben estar aprobados antes de publicar. Se puede confirmar un archivo en borrador y publicar después desde las fichas.
 
 Cargar Excel exige `products.view`, `products.create` y `products.update`. Reemplazar exige además `products.delete`, `categories.update` y `brands.update`. Cada lote está vinculado al usuario que lo subió; otro usuario no puede verlo ni confirmarlo. Auth, la configuración vigente de MFA, CSRF y rate limits siguen activos.
 
-Las vistas previas se guardan cifradas fuera de public_html y duran dos horas. Aplicar, cancelar o vencer elimina el payload. Se conservan el lote, sus contadores, errores y auditoría. Reenviar una confirmación aplicada no duplica productos. Si el catálogo cambia después de analizar, hay que analizar nuevamente: no se sobrescriben cambios posteriores inadvertidamente.
+Las vistas previas y fotos preparadas se guardan cifradas fuera de public_html y duran dos horas; el libro temporal permanece privado con permisos 0600 durante la preparación finita de las fotos. Aplicar, cancelar o vencer elimina el payload. Se conservan el lote, sus contadores, errores y auditoría. Reenviar una confirmación aplicada no duplica productos. Si el catálogo cambia después de analizar, hay que analizar nuevamente: no se sobrescriben cambios posteriores inadvertidamente.
 
 La carga y aplicación se realizan con PHP en peticiones finitas; no requieren Node, workers ni Composer en el hosting.

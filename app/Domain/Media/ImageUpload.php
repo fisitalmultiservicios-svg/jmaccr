@@ -10,8 +10,11 @@ use Illuminate\Validation\ValidationException;
 
 final class ImageUpload
 {
-    public function store(UploadedFile $file, int $actorId, string $alt): int
+    public function prepare(UploadedFile $file): array
     {
+        if (! function_exists('imagecreatefromstring') || ! function_exists('imagewebp') || ! (imagetypes() & IMG_WEBP)) {
+            throw ValidationException::withMessages(['file' => 'El hosting necesita GD con soporte WebP para preparar fotografías. Revisa Diagnóstico.']);
+        }
         $allowed = ['image/jpeg', 'image/png', 'image/webp'];
         if (defined('IMG_AVIF') && (imagetypes() & IMG_AVIF)) {
             $allowed[] = 'image/avif';
@@ -30,8 +33,9 @@ final class ImageUpload
             $this->reject();
         }
         try {
-            $width = min(1920, $size[0]);
-            $height = max(1, (int) round($size[1] * $width / $size[0]));
+            $scale = min(1, 1920 / max($size[0], $size[1]));
+            $width = max(1, (int) round($size[0] * $scale));
+            $height = max(1, (int) round($size[1] * $scale));
             $clean = imagecreatetruecolor($width, $height);
             imagealphablending($clean, false);
             imagesavealpha($clean, true);
@@ -40,11 +44,11 @@ final class ImageUpload
             imagewebp($clean, null, 85);
             $bytes = ob_get_clean();
             imagedestroy($clean);
+            unset($clean);
         } finally {
             imagedestroy($image);
+            unset($image);
         }
-        $path = 'media/'.Str::uuid().'.webp';
-        Storage::disk('local')->put($path, $bytes);
         $thumbnail = imagecreatefromstring($bytes);
         $thumbWidth = min(480, $width);
         $thumbHeight = max(1, (int) round($height * $thumbWidth / $width));
@@ -57,15 +61,32 @@ final class ImageUpload
         $thumbBytes = ob_get_clean();
         imagedestroy($thumb);
         imagedestroy($thumbnail);
+        unset($thumb, $thumbnail);
+
+        return ['bytes' => $bytes, 'thumb_bytes' => $thumbBytes, 'width' => $width, 'height' => $height, 'thumb_width' => $thumbWidth, 'thumb_height' => $thumbHeight];
+    }
+
+    public function store(UploadedFile $file, int $actorId, string $alt): int
+    {
+        return $this->storePrepared($this->prepare($file), $actorId, $alt)['id'];
+    }
+
+    public function storePrepared(array $image, int $actorId, string $alt): array
+    {
+        $path = 'media/'.Str::uuid().'.webp';
         $thumbPath = 'media/'.Str::uuid().'-thumb.webp';
-        Storage::disk('local')->put($thumbPath, $thumbBytes);
         try {
-            return DB::table('media')->insertGetId([
-                'disk' => 'local', 'path' => $path, 'mime' => 'image/webp', 'bytes' => strlen($bytes),
-                'width' => $width, 'height' => $height, 'alt' => $alt, 'checksum' => hash('sha256', $bytes),
-                'variants_json' => json_encode(['thumb' => ['path' => $thumbPath, 'width' => $thumbWidth, 'height' => $thumbHeight]]),
+            if (! Storage::disk('local')->put($path, $image['bytes']) || ! Storage::disk('local')->put($thumbPath, $image['thumb_bytes'])) {
+                throw new \RuntimeException('No se pudo guardar la fotografía privada.');
+            }
+            $id = DB::table('media')->insertGetId([
+                'disk' => 'local', 'path' => $path, 'mime' => 'image/webp', 'bytes' => strlen($image['bytes']),
+                'width' => $image['width'], 'height' => $image['height'], 'alt' => $alt, 'checksum' => hash('sha256', $image['bytes']),
+                'variants_json' => json_encode(['thumb' => ['path' => $thumbPath, 'width' => $image['thumb_width'], 'height' => $image['thumb_height']]]),
                 'status' => 'candidate', 'uploaded_by' => $actorId, 'created_at' => now(), 'updated_at' => now(),
             ]);
+
+            return ['id' => $id, 'paths' => [$path, $thumbPath]];
         } catch (\Throwable $e) {
             Storage::disk('local')->delete([$path, $thumbPath]);
             throw $e;

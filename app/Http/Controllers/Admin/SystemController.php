@@ -20,6 +20,7 @@ class SystemController extends Controller
         foreach (['pdo_mysql', 'mbstring', 'openssl', 'fileinfo', 'curl', 'dom', 'xmlreader', 'zip', 'gd', 'intl'] as $e) {
             $checks['Extensión '.$e] = extension_loaded($e);
         }$mailer = MailConfig::configure();
+        $checks['Fotografías Excel: GD WebP'] = function_exists('imagewebp') && (imagetypes() & IMG_WEBP) !== 0;
         $checks['SMTP configurado'] = MailConfig::available($mailer);
 
         return view('admin.diagnostics', ['checks' => $checks, 'cron' => Site::setting('system.cron', []), 'outbox' => DB::table('notifications_outbox')->select('status', DB::raw('COUNT(*) AS total'))->groupBy('status')->get(), 'environment' => app()->environment(), 'release' => Release::VERSION]);

@@ -1,0 +1,3 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Excel demasiado grande · JMAC</title></head>
+<body><h1>El hosting no permitió recibir el Excel</h1><p>El archivo supera el tamaño de subida configurado en PHP. El catálogo no se ha modificado.</p><p>El límite actual es de {{ $limits['effective_mb'] }} MB. En cPanel → MultiPHP INI Editor selecciona tu dominio y configura upload_max_filesize=128M, post_max_size=144M y memory_limit=256M; guarda los cambios y vuelve a intentar. JMAC admite hasta 128 MB y 2.000 productos.</p><p><a href="/admin/catalog/imports">Volver a cargar Excel</a></p></body></html>
