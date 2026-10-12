@@ -1,5 +1,18 @@
 # JMAC 2.0 — versión oficial 1.0.0
 
+## Corrección del aviso general al analizar Excel
+
+[Descargar JMAC-correccion-Excel.zip (11 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-correccion-Excel.zip).
+
+Para instalaciones con la actualización de fotografías aplicada. Admite ajustes de impresora estándar que Excel guarda como .bin, sin leerlos/extraerlos/ejecutarlos. Conserva los límites y rechazos de macros, conexiones, objetos y archivos no admitidos. Ahora el mensaje identifica la causa concreta de tamaño/contenido; no supone que el archivo original sea malicioso.
+
+Sube y extrae en /home/jmaccr. Pulsa Sistema → Diagnóstico → Vaciar caché, Ctrl+F5 y analiza nuevamente el archivo. Actualiza un solo PHP y añade manual/checksums; conserva configuración/BD/storage/vendor/recursos públicos/MFA. Sin migraciones ni JS ni cambios de PHP INI. Los lotes fallidos anteriores conservan su mensaje histórico.
+
+[Manual](actualizaciones/excel-validacion/LEEME.md) · [Paquete](actualizaciones/excel-validacion/EVIDENCIA.json).
+
+101 tests / 906 aserciones SQLite; 23 / 329 MariaDB; Pint: correctos. ZIP aplicado con unzip nativo sobre runtime cPanel: datos/configuración/permisos conservados, fotos/SKU asociados y error específico comprobado. BD de pruebas eliminada. El adjunto completo del propietario sigue sin poder inspeccionarse por el límite de transferencia del cloud; aplicación en hosting pendiente. Main no cambia.
+
+
 ## Actualización: inventario Excel con fotografías
 
 [Descargar JMAC-Excel-con-fotografias.zip (42 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-Excel-con-fotografias.zip).

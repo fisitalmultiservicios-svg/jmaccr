@@ -1,0 +1,16 @@
+{
+  "archive": "JMAC-correccion-Excel.zip",
+  "bytes": 10944,
+  "sha256": "489ac10f740b7a0b5a38cf0b542260f2457b61d17d3a737d3079ed3ed9343d17",
+  "payload_files": 4,
+  "file_checksums": {
+    "jmac_app/app/Domain/Catalog/ExcelCatalog.php": "be491de9ea2e1eaf7e67f68ba2a5b5c65a1f5a6fdeee4c4e91250c69891cfaba",
+    "jmac_app/docs/EXCEL_ERROR_DETALLADO.md": "75a897b29ba3a2caae230bff01bb9b6a49a618ea23cb9ca1732d428fe4f6990f",
+    "LEEME_CORRECCION_EXCEL.txt": "75a897b29ba3a2caae230bff01bb9b6a49a618ea23cb9ca1732d428fe4f6990f"
+  },
+  "no_javascript_files": true,
+  "no_env_storage_database_vendor_assets_or_ini": true,
+  "migrations": 0,
+  "hosting_applied": false,
+  "owner_original_workbook_tested": false
+}
