@@ -1,0 +1,12 @@
+{
+  "result": "PASSED",
+  "native_unzip": true,
+  "visible_javascript_uploaded_to_both_roots_first": true,
+  "preserved_env_vendor_public_index_excel_https_and_private_root_permissions": true,
+  "javascript_files_in_archive": 0,
+  "manifest_assets_resolve": true,
+  "migrations": 0,
+  "hosting_applied": false,
+  "hosting_antivirus_tested": false,
+  "archive_sha256": "d1f59bd47f219f52d5836216ed63e85808dca02db9dfdc58e3d6a50b9be5ac5e"
+}

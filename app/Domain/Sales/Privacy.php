@@ -4,10 +4,11 @@ namespace App\Domain\Sales;
 
 use App\Domain\Site\Site;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Validation\ValidationException;
 
 final class Privacy
 {
+    public const ACCEPTANCE_NOT_REQUIRED = 'sin_aceptacion_requerida';
+
     public static function encrypt(?string $value): ?string
     {
         return $value === null || $value === '' ? null : Crypt::encryptString($value);
@@ -31,14 +32,6 @@ final class Privacy
     public static function legal(): array
     {
         return Site::setting('privacy.document', ['approved' => false, 'version' => '', 'body' => '']);
-    }
-
-    public static function requireConsent(string $version): void
-    {
-        $legal = self::legal();
-        if (empty($legal['approved']) || empty($legal['body']) || $legal['version'] !== $version) {
-            throw ValidationException::withMessages(['privacy_accepted' => 'La política de privacidad requiere configuración y aprobación del dueño.']);
-        }
     }
 
     public static function person(object $row, array $fields): object

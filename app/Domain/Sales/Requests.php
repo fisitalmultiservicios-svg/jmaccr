@@ -23,22 +23,21 @@ final class Requests
 
     public function preorder(array $data, string $session): array
     {
-        Privacy::requireConsent($data['consent_version']);
-        $customer = $data['customer'];
+        $customer = array_replace(['name' => '', 'phone' => '', 'email' => '', 'company' => ''], $data['customer']);
         $customer['phone'] = Privacy::phone($customer['phone']);
         $customer['name'] = trim($customer['name']);
         $customer['email'] = mb_strtolower(trim($customer['email'] ?? ''));
         $customer['company'] = trim($customer['company'] ?? '');
         $items = array_map(fn ($line) => ['product_id' => (int) $line['product_id'], 'quantity' => (int) $line['quantity']], $data['items']);
         usort($items, fn ($a, $b) => $a['product_id'] <=> $b['product_id']);
-        $payload = ['customer' => $customer, 'items' => $items, 'notes' => $data['notes'] ?? '', 'consent_version' => $data['consent_version'], 'email_opt_in' => (bool) ($data['email_opt_in'] ?? false)];
+        $payload = ['customer' => $customer, 'items' => $items, 'notes' => $data['notes'] ?? '', 'consent_version' => Privacy::ACCEPTANCE_NOT_REQUIRED, 'email_opt_in' => (bool) ($data['email_opt_in'] ?? false)];
         $hash = Privacy::hash(json_encode($payload));
         $sessionHash = Privacy::hash($session);
         $key = $data['idempotency_key'];
         $execute = function () use ($key, $hash, $sessionHash, $payload) {
             $existing = DB::table('preorders')->where('idempotency_key', $key)->first();
             if ($existing) {
-                return $this->existing($existing, $hash, $sessionHash);
+                return $this->existing($existing, $hash, $sessionHash, $payload, 'preorder');
             }
             $ids = array_column($payload['items'], 'product_id');
             $products = DB::table('products')->whereIn('id', $ids)->where('status', 'published')->whereNull('deleted_at')->orderBy('id')->lockForUpdate()->get()->keyBy('id');
@@ -71,15 +70,14 @@ final class Requests
         } catch (QueryException $exception) {
             $existing = DB::table('preorders')->where('idempotency_key', $key)->first();
             if ($existing) {
-                return $this->existing($existing, $hash, $sessionHash);
+                return $this->existing($existing, $hash, $sessionHash, $payload, 'preorder');
             }throw $exception;
         }
     }
 
     public function contact(array $data, string $session): array
     {
-        Privacy::requireConsent($data['consent_version']);
-        $payload = array_intersect_key($data, array_flip(['name', 'phone', 'email', 'company', 'message', 'consent_version', 'email_opt_in']));
+        $payload = ['name' => $data['name'], 'phone' => $data['phone'], 'email' => $data['email'] ?? '', 'company' => $data['company'] ?? '', 'message' => $data['message'], 'consent_version' => Privacy::ACCEPTANCE_NOT_REQUIRED, 'email_opt_in' => (bool) ($data['email_opt_in'] ?? false)];
         $payload['phone'] = Privacy::phone($data['phone']);
         $payload['email'] = mb_strtolower(trim($data['email'] ?? ''));
         $payload['company'] = $data['company'] ?? '';
@@ -90,7 +88,7 @@ final class Requests
         $execute = function () use ($payload, $hash, $sessionHash, $key) {
             $existing = DB::table('contact_submissions')->where('idempotency_key', $key)->first();
             if ($existing) {
-                return $this->existing($existing, $hash, $sessionHash);
+                return $this->existing($existing, $hash, $sessionHash, $payload, 'contact');
             }[$year,$seq,$code] = self::sequence('contacts', 'JMAC-CO');
             $fields = [];
             foreach (['name', 'phone', 'email', 'company', 'message'] as $field) {
@@ -107,14 +105,35 @@ final class Requests
         } catch (QueryException $exception) {
             $existing = DB::table('contact_submissions')->where('idempotency_key', $key)->first();
             if ($existing) {
-                return $this->existing($existing, $hash, $sessionHash);
+                return $this->existing($existing, $hash, $sessionHash, $payload, 'contact');
             }throw $exception;
         }
     }
 
-    private function existing(object $existing, string $hash, string $sessionHash): array
+    private function existing(object $existing, string $hash, string $sessionHash, array $payload, string $kind): array
     {
-        abort_unless(hash_equals($existing->request_hash ?? '', $hash) && hash_equals($existing->session_hash ?? '', $sessionHash), 409, 'El token pertenece a otro intento. Vuelve a revisar el formulario.');
+        abort_unless(hash_equals($existing->session_hash ?? '', $sessionHash), 409, 'El token pertenece a otro intento. Vuelve a revisar el formulario.');
+        $matches = hash_equals($existing->request_hash ?? '', $hash);
+        // Preserve retries of records captured before privacy stopped being
+        // mandatory. Compare their protected snapshots, never live products,
+        // and never replace historical consent or request hashes.
+        if (! $matches && $existing->consent_version !== Privacy::ACCEPTANCE_NOT_REQUIRED) {
+            $old = $payload;
+            if ($kind === 'preorder') {
+                foreach (['name', 'phone', 'email', 'company'] as $field) {
+                    $old['customer'][$field] = Privacy::decrypt($existing->{'customer_'.$field});
+                }
+                $old['items'] = DB::table('preorder_items')->where('preorder_id', $existing->id)->orderBy('product_id')->get(['product_id', 'quantity'])->map(fn ($line) => ['product_id' => (int) $line->product_id, 'quantity' => (int) $line->quantity])->all();
+                $old['notes'] = Privacy::decrypt($existing->observations);
+            } else {
+                foreach (['name', 'phone', 'email', 'company', 'message'] as $field) {
+                    $old[$field] = Privacy::decrypt($existing->$field);
+                }
+            }
+            $old['email_opt_in'] = (bool) $existing->email_opt_in;
+            $matches = $old === $payload;
+        }
+        abort_unless($matches, 409, 'El token pertenece a otro intento. Vuelve a revisar el formulario.');
 
         return ['code' => $existing->public_code, 'created' => false];
     }

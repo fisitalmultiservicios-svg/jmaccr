@@ -24,7 +24,7 @@ final class Site
         $tokens = array_replace(self::defaults(), $theme ? json_decode($theme->design_tokens, true) : []);
         $menu = DB::table('nav_menus')->where('name', 'principal')->value('id');
 
-        return ['tokens' => $tokens, 'menu' => DB::table('nav_items')->where('menu_id', $menu)->where('visible', true)->orderBy('position')->get(), 'business' => self::setting('business', []), 'preview' => $preview];
+        return ['tokens' => $tokens, 'menu' => DB::table('nav_items')->where('menu_id', $menu)->where('visible', true)->orderBy('position')->get(), 'business' => self::setting('business', []), 'catalog' => self::setting('catalog.ui', []), 'preview' => $preview];
     }
 
     public static function css(array $tokens): string

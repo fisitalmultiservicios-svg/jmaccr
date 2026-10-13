@@ -81,12 +81,12 @@ class SalesTest extends TestCase
         }$this->assertDatabaseCount('preorders', 1);
     }
 
-    public function test_invalid_unpublished_duplicate_items_and_missing_consent_are_rejected(): void
+    public function test_invalid_unpublished_duplicate_items_and_invalid_quantities_are_rejected(): void
     {
         $payload = $this->preorder();
         $payload['customer']['phone'] = '';
         $this->postJson('/api/preorders', $payload)->assertUnprocessable();
-        $this->postJson('/api/preorders', $this->preorder(['privacy_accepted' => false]))->assertUnprocessable();
+        $this->postJson('/api/preorders', $this->preorder(['items' => [['product_id' => $this->product, 'quantity' => 0]]]))->assertUnprocessable();
         $payload = $this->preorder();
         $payload['items'][] = $payload['items'][0];
         $this->postJson('/api/preorders', $payload)->assertUnprocessable();
@@ -96,15 +96,15 @@ class SalesTest extends TestCase
         $this->assertDatabaseCount('preorder_items', 0);
     }
 
-    public function test_unapproved_legal_honeypot_and_rate_limit_prevent_capture(): void
+    public function test_honeypot_and_rate_limit_still_protect_forms_without_a_privacy_document(): void
     {
         $this->postJson('/api/contacts', $this->contact(['website' => 'spam']))->assertUnprocessable();
         DB::table('site_settings')->where('key', 'privacy.document')->delete();
-        $this->postJson('/api/contacts', $this->contact())->assertUnprocessable();
+        $this->postJson('/api/contacts', $this->contact())->assertCreated();
         for ($i = 0; $i < 5; $i++) {
             $response = $this->postJson('/api/contacts', $this->contact());
         }$response->assertStatus(429);
-        $this->assertDatabaseCount('contact_submissions', 0);
+        $this->assertDatabaseCount('contact_submissions', 4);
     }
 
     public function test_smtp_connection_failure_does_not_lose_preorder_and_retry_is_visible(): void

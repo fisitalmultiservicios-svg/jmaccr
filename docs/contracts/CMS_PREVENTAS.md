@@ -17,4 +17,6 @@ UUID idempotency_key ligado a sesión/hash de payload; customer.name y phone obl
 Estados recibida → en_revision → cotizada → gestionada → cerrada, cancelada desde estados permitidos. Cambio con usuario/nota/timestamp y privilegio para excepciones.
 
 ## Datos iniciales
+
+Actualización autorizada del 13 de octubre de 2026: privacidad deja de ser condición de consulta/preventa. privacy_accepted/consent_version no se exigen al cliente; la columna consent_version de las nuevas solicitudes guarda sin_aceptacion_requerida sin simular aceptación. Las versiones/snapshots anteriores permanecen; reintentos de solicitudes anteriores se comparan con la misma sesión y datos protegidos. El documento legal es independiente y editable, sin publicación automática. Cantidad se elige antes de añadir tanto en tarjetas como fichas, respeta el máximo configurable y se valida en servidor. Esta instrucción del propietario sustituye la aceptación obligatoria de la definición inicial anterior; permisos, protección de PII, transacciones/consecutivos, antispam y CSRF se conservan.
 0 categories, brands, products, product_media, preorders, preorder_items, contacts, posts, customers y usuarios heredados. Seed solo roles/permisos/settings técnicos, páginas DRAFT y media candidato. Admin nuevo explícito por comando seguro. CSV vacío no es un importador.

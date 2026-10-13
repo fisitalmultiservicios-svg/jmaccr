@@ -2,12 +2,18 @@
 
 namespace App\Domain\Catalog;
 
+use App\Domain\Site\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 final class Catalog
 {
+    public static function quantityLimit(?array $settings = null): int
+    {
+        return max(1, min(999, (int) (($settings ?? Site::setting('catalog.ui', []))['max_quantity'] ?? 999)));
+    }
+
     public static function search(Request $request, bool $featured = false)
     {
         $input = $request->validate(['q' => 'nullable|string|max:120', 'jmac_cat' => 'nullable|string|max:180', 'category' => 'nullable|string|max:180', 'brand' => 'nullable|string|max:180', 'attributes' => 'nullable|array|max:8', 'attributes.*' => 'nullable|string|max:200', 'page' => 'nullable|integer|min:1|max:100000']);

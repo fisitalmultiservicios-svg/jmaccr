@@ -1,0 +1,13 @@
+{
+  "command": "php artisan test",
+  "engine": "SQLite :memory:",
+  "result": "passed",
+  "tests": 112,
+  "passed": 112,
+  "assertions": 1033,
+  "duration_ms": 23140,
+  "pint": "passed",
+  "build": "passed; app-CsHK9iZX.js / app-BCD9v5k7.css",
+  "initial_expected_behavior_update": "A rate-limit test still expected blocked privacy captures. Updated it to count the actual permitted requests while retaining honeypot/rate-limit assertions. No security test was disabled.",
+  "hosting_applied": false
+}

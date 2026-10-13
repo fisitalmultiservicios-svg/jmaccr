@@ -1,0 +1,31 @@
+{
+  "result": "PASSED",
+  "mode": "source",
+  "card_quantity": 3,
+  "detail_addition": 2,
+  "persisted_quantity": 5,
+  "invalid_and_excess_quantities_do_not_change_cart": true,
+  "invalid_cart_quantity_prevents_send": true,
+  "forms_without_privacy_policy_or_checkbox": true,
+  "preorder_retry_returns_existing_reference": true,
+  "viewport_widths": [
+    360,
+    390,
+    768,
+    1303,
+    1440
+  ],
+  "javascript_errors": [],
+  "final": {
+    "preorders": 1,
+    "contacts": 1,
+    "quantity": 5,
+    "privacy": "sin_aceptacion_requerida",
+    "contact_privacy": "sin_aceptacion_requerida",
+    "no_policy": true,
+    "pii_encrypted": true,
+    "outbox": 2
+  },
+  "hosting_applied": false,
+  "database_dropped": true
+}
