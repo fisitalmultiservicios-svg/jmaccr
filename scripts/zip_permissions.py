@@ -4,7 +4,7 @@ from stat import S_IFDIR, S_IFREG
 from zipfile import ZIP_DEFLATED, ZipInfo
 
 
-def write_entries(archive, entries):
+def write_entries(archive, entries, *, date_time=(1980, 1, 1, 0, 0, 0)):
     directories = set()
     for name in entries:
         path = PurePosixPath(name)
@@ -15,13 +15,13 @@ def write_entries(archive, entries):
             if str(parent) not in {'.', 'jmac_app'}:
                 directories.add(parent.as_posix() + '/')
     for name in sorted(directories, key=lambda item: (item.count('/'), item)):
-        info = ZipInfo(name)
+        info = ZipInfo(name, date_time=date_time)
         info.create_system = 3
         info.external_attr = ((S_IFDIR | 0o755) << 16) | 0x10
         info.compress_type = ZIP_DEFLATED
         archive.writestr(info, b'')
     for name, content in sorted(entries.items()):
-        info = ZipInfo(name)
+        info = ZipInfo(name, date_time=date_time)
         info.create_system = 3
         info.external_attr = (S_IFREG | 0o644) << 16
         info.compress_type = ZIP_DEFLATED
