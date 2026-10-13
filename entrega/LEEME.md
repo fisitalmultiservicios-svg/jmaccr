@@ -1,5 +1,18 @@
 # JMAC 2.0 — versión oficial 1.0.0
 
+## Cantidad antes del carrito y formularios sin aceptación obligatoria
+
+Descarga los dos archivos: [JavaScript app-CsHK9iZX.js (30 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/app-CsHK9iZX.js) y [JMAC-privacidad-cantidades.zip (39 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-privacidad-cantidades.zip).
+
+El propietario pidió quitar la condición de privacidad para consultas/preventas y seleccionar unidades antes de añadir. Formularios/API no exigen checkbox/versión/documento aprobado. La política queda editable independiente; no se inventa consentimiento: nuevas solicitudes registran sin_aceptacion_requerida. Histórico, cifrado, CSRF/RBAC/antispam/límites/idempotencia/outbox y roles se mantienen. Cada tarjeta/ficha pide cantidad, suma unidades exactas y rechaza fracciones/cero/excesos sin recortar. Máximo configurable en Sistema → Configuración.
+
+Sube primero app-CsHK9iZX.js a /home/jmaccr/public_html/build/assets y /home/jmaccr/jmac_app/public/build/assets. Después sube y extrae el ZIP en /home/jmaccr. Sistema → Diagnóstico → Vaciar caché y Ctrl+F5. El ZIP no contiene .js; el JS visible se distribuye separado con escaneo activo. Conserva .env/BD/storage/usuarios/MFA/vendor, Excel y HTTPS; sin migraciones ni reinstalación. No se certifica antivirus ni aplicación remota.
+
+[Manual paso a paso](actualizaciones/privacidad-cantidades/LEEME.md) · [Evidencia](actualizaciones/privacidad-cantidades/EVIDENCIA.json) · [Navegador runtime](actualizaciones/privacidad-cantidades/navegador-paquete.json) · [Capturas](actualizaciones/privacidad-cantidades/capturas/).
+
+112 tests / 1033 aserciones SQLite y 21 / 159 MariaDB correctos; Pint/build correctos. Navegador fuente y runtime: 3+2=5 unidades persistidas, formularios reales sin aceptación/política, datos cifrados, contactos/preventas/outbox e idempotencia; cinco anchos sin errores JS. ZIP nativo/JS directo probados con configuración/datos/permisos conservados; bases QA eliminadas. Main no cambia.
+
+
 ## Dominio oficial: corrección de HTTP 400
 
 [Descargar JMAC-correccion-HTTP-400.zip (6 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-correccion-HTTP-400.zip).

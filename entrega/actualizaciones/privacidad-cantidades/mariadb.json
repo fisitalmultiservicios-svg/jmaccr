@@ -1,0 +1,12 @@
+{
+  "tool": "phpunit",
+  "result": "passed",
+  "tests": 21,
+  "passed": 21,
+  "assertions": 159,
+  "duration_ms": 10068,
+  "command": "php artisan test --filter=CheckoutOptionsTest|SalesTest|CatalogTest",
+  "engine": "MariaDB 11.8.6",
+  "database": "jmac_cart_privacy_feature_test",
+  "database_dropped": true
+}
