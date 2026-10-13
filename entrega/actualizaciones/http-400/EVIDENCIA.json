@@ -1,0 +1,15 @@
+{
+  "archive": "JMAC-correccion-HTTP-400.zip",
+  "bytes": 5980,
+  "sha256": "556edb47ce4f7c35fcb4531e220ac0f15339f7ef16e1c05dc2367bf837f43f00",
+  "payload_files": 4,
+  "file_checksums": {
+    "jmac_app/app/Http/Middleware/SecurityHeaders.php": "748777c1ac6bc1aad5916b840e2ce3be7f1ae69f17a3ecaa8ffdb01679ff8926",
+    "jmac_app/docs/HTTP_400_HTTPS.md": "7094e5805254696eb1bb279ef8def5dbe8a3bcc5d91cde1bebfe7386e9cb79af",
+    "LEEME_HTTP_400.txt": "7094e5805254696eb1bb279ef8def5dbe8a3bcc5d91cde1bebfe7386e9cb79af"
+  },
+  "no_javascript_files": true,
+  "no_env_storage_database_vendor_assets_or_ini": true,
+  "migrations": 0,
+  "hosting_applied": false
+}

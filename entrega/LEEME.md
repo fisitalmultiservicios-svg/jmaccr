@@ -1,5 +1,18 @@
 # JMAC 2.0 — versión oficial 1.0.0
 
+## Dominio oficial: corrección de HTTP 400
+
+[Descargar JMAC-correccion-HTTP-400.zip (6 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-correccion-HTTP-400.zip).
+
+El 13 de octubre las consultas públicas reprodujeron HTTP 400 mientras HTTPS abría la web y el administrador con 200. SecurityHeaders rechazaba HTTP en producción. Esta corrección redirige GET/HEAD reales al origen HTTPS de APP_URL conservando ruta/query; el destino no depende de Host/Forwarded. Las acciones HTTP permanecen denegadas, incluso con method override. HTTPS/CSP/roles/CSRF/MFA se mantienen.
+
+Puedes entrar ya por https://jmaccr.com/ y https://jmaccr.com/admin/login. Para corregir HTTP, sube y extrae el ZIP en /home/jmaccr y pulsa Sistema → Diagnóstico → Vaciar caché. APP_URL debe ser https://jmaccr.com. Prueba escribiendo http://jmaccr.com/ en una ventana privada. Actualiza un solo PHP y añade manual/checksums: conserva configuración, datos, fotos, vendor, assets y correcciones Excel. Sin migraciones ni JS ni cambios remotos DNS/cPanel. Aplica este parche después de las actualizaciones anteriores que contienen SecurityHeaders.
+
+[Manual](actualizaciones/http-400/LEEME.md) · [Evidencia](actualizaciones/http-400/EVIDENCIA.json) · [Consultas públicas iniciales](actualizaciones/http-400/http-publico-antes.json) · [Paquete runtime](actualizaciones/http-400/paquete.json).
+
+108 tests / 993 aserciones SQLite y Pint correctos. ZIP real con unzip nativo y servidor PHP runtime: GET/HEAD 301, POST 400, sin BD ni cookies; configuración/vendor/índice/manifest/Excel y permisos preservados. Las consultas públicas HTTPS mantuvieron verificación TLS; el smoke local verifica redirección HTTP y no simula certificado público. Aplicación por el propietario pendiente; no se afirma corrección remota ni diagnóstico de cualquier 400 HTTPS diferente. Main no cambia.
+
+
 ## Corrección de 409 al preparar fotografías
 
 [Descargar JMAC-Excel-preparacion.zip (17 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-Excel-preparacion.zip).
