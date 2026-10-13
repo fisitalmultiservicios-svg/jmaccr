@@ -10,6 +10,21 @@ class SecurityHeaders
     public function handle(Request $request, Closure $next)
     {
         if (app()->isProduction() && ! $request->isSecure()) {
+            if (in_array($request->getRealMethod(), ['GET', 'HEAD'], true)) {
+                $canonical = rtrim((string) config('app.url'), '/');
+                $parts = parse_url($canonical);
+                $uri = $request->getRequestUri();
+                // Use only the configured HTTPS origin, never an incoming
+                // Host/Forwarded header. Invalid configuration fails closed.
+                if (filter_var($canonical, FILTER_VALIDATE_URL) && is_array($parts)
+                    && strtolower($parts['scheme'] ?? '') === 'https'
+                    && ! isset($parts['user']) && ! isset($parts['pass'])
+                    && ! isset($parts['query']) && ! isset($parts['fragment'])
+                    && in_array($parts['path'] ?? '', ['', '/'], true)
+                    && ! preg_match('/[\x00-\x20\x7f]/', $uri)) {
+                    return redirect()->to($canonical.$uri, 301)->header('Cache-Control', 'no-store, private');
+                }
+            }
             abort(400, 'Se requiere HTTPS.');
         }
         $nonce = base64_encode(random_bytes(18));

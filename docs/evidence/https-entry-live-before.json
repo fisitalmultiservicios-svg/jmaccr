@@ -1,0 +1,16 @@
+{
+  "observed_date": "2026-10-13",
+  "requests": [
+    {"url": "https://jmaccr.com/", "status": 200, "content": "JMAC 2.0 corporate page", "hsts": true},
+    {"url": "https://www.jmaccr.com/", "status": 200, "content": "JMAC 2.0 corporate page", "hsts": true},
+    {"url": "http://jmaccr.com/", "status": 400, "content": "Symfony 400 Bad Request"},
+    {"url": "http://www.jmaccr.com/", "status": 400},
+    {"url": "https://jmaccr.com/admin/login", "status": 200, "content": "Iniciar sesión · JMAC"},
+    {"url": "https://jmaccr.com/contacto/", "status": 200, "final_url": "https://jmaccr.com/contacto"}
+  ],
+  "initial_admin_request": "Proxy upstream connection timeout (503); a subsequent fresh request returned the real JMAC login page with HTTP 200.",
+  "tls_verification_disabled": false,
+  "cookies_csrf_and_personal_data_recorded": false,
+  "hosting_or_dns_changed": false,
+  "origin_ip_verified": false
+}

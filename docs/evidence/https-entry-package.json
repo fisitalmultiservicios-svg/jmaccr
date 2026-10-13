@@ -1,0 +1,33 @@
+{
+  "result": "PASSED",
+  "native_unzip": true,
+  "preserved_configuration_vendor_index_assets_excel_and_private_root_permissions": true,
+  "runtime_vendor_only": true,
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 301,
+      "location": "https://jmac-qa.example.test/",
+      "session_cookies": false
+    },
+    {
+      "method": "HEAD",
+      "path": "/catalogo/?q=ABC%2001&page=2",
+      "status": 301,
+      "location": "https://jmac-qa.example.test/catalogo/?q=ABC%2001&page=2",
+      "session_cookies": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/preorders",
+      "status": 400,
+      "location": null,
+      "session_cookies": false
+    }
+  ],
+  "database": "no database used",
+  "public_tls_simulated": false,
+  "hosting_applied": false,
+  "archive_sha256": "556edb47ce4f7c35fcb4531e220ac0f15339f7ef16e1c05dc2367bf837f43f00"
+}

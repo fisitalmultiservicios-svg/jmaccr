@@ -10,6 +10,8 @@ Aviso «Excel demasiado grande o con contenido activo» con PHP en 512M: [correc
 
 Error 409 durante la preparación de fotografías: [corrección y cómo retomar la importación](docs/EXCEL_PREPARACION_409.md).
 
+Dominio oficial: [corrección de HTTP 400 y redirección a HTTPS](docs/HTTP_400_HTTPS.md).
+
 Corrección posterior de la página publicada: [quitar el espacio vacío del catálogo](docs/AJUSTE_CATALOGO.md). El parche se aplica después del paquete oficial 1.0.0; el código fuente de esta rama ya incorpora el ajuste.
 
 Sin WordPress/importación vieja/pagos. Cero productos/categorías/marcas/artículos/solicitudes/usuarios iniciales, sin contraseña default. Semilla DRAFT/fotos candidatas y contactos/legal pendientes. No modifica producción automáticamente.
