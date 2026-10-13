@@ -1,5 +1,18 @@
 # JMAC 2.0 — versión oficial 1.0.0
 
+## Corrección de 409 al preparar fotografías
+
+[Descargar JMAC-Excel-preparacion.zip (17 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-Excel-preparacion.zip).
+
+Para la instalación con Excel/fotografías. Las peticiones se serializan por la fila InnoDB y el cliente evita que el botón y el temporizador se envíen simultáneamente. Un retry sobre un estado terminal vuelve a la revisión; timeout/deadlock MySQL concreto es reintentable. Permisos, CSRF, avances, confirmación, copia y catálogo se conservan. No depende del flock de preparación del hosting.
+
+Sube y extrae en /home/jmaccr; Sistema → Diagnóstico → Vaciar caché. Retoma https://jmaccr.com/admin/catalog/imports/5, sin /prepare, y pulsa Ctrl+F5. Si el lote venció tras dos horas, carga el Excel nuevamente. El parche actualiza dos PHP y la vista, añade manual/checksums y conserva .env, BD, storage, fotos, MFA, vendor y assets. No reinstala, no tiene migraciones ni archivos JS y no modifica PHP INI.
+
+[Manual](actualizaciones/excel-preparacion/LEEME.md) · [Paquete](actualizaciones/excel-preparacion/EVIDENCIA.json) · [Concurrencia real](actualizaciones/excel-preparacion/concurrencia.json) · [Navegador runtime](actualizaciones/excel-preparacion/navegador-paquete.json).
+
+104 tests / 953 aserciones SQLite y 26 / 376 MariaDB correctos; Pint correcto. Dos procesos reales avanzan 10→12 fotos; timeout InnoDB conserva avance y otros fallos SQL se propagan. Navegador fuente/runtime con doble submit y primera conexión lenta: dos POST para 12 fotos, miniaturas, retry y cancelación correctos, cero errores JS. ZIP aplicado con unzip nativo conserva archivos/permisos; bases QA eliminadas. Sin acceso remoto al hosting ni prueba integral del Excel original. Main permanece intacta.
+
+
 ## Corrección del aviso general al analizar Excel
 
 [Descargar JMAC-correccion-Excel.zip (11 KB)](https://github.com/fisitalmultiservicios-svg/jmaccr/raw/refs/heads/entrega-jmac-2-0/entrega/JMAC-correccion-Excel.zip).

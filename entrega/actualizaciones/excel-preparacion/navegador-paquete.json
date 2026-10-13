@@ -1,0 +1,22 @@
+{
+  "result": "PASSED",
+  "mode": "packaged",
+  "manual_double_submit_and_automatic_timer": true,
+  "first_request_delayed_ms": 1000,
+  "preparation_posts": 2,
+  "expected_posts_for_12_photos": 2,
+  "ready_retry_redirected": true,
+  "cancel_stops_automatic_submit": true,
+  "photo_thumbnails_loaded": 12,
+  "javascript_errors": [],
+  "final": {
+    "status": "ready",
+    "photos_prepared": 12,
+    "products": 0,
+    "media": 0,
+    "cancelled_status": "cancelled"
+  },
+  "owner_original_workbook_tested": false,
+  "hosting_applied": false,
+  "database_dropped": true
+}

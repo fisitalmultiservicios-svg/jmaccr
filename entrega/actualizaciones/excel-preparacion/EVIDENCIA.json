@@ -1,0 +1,18 @@
+{
+  "archive": "JMAC-Excel-preparacion.zip",
+  "bytes": 16869,
+  "sha256": "4a325e73267a366532c894c21e70de2e76d2e1970123692a426a5b35585a674e",
+  "payload_files": 6,
+  "file_checksums": {
+    "jmac_app/app/Domain/Catalog/CatalogImports.php": "f1c2dbcd059a820ba1361ad030a3e2130b614bf378af0e01ee93acc564f412ec",
+    "jmac_app/app/Http/Controllers/Admin/CatalogImportController.php": "63e322278a8397cd7491ed570f9102bb0e5bf6ec1af9968e216340ee13626722",
+    "jmac_app/resources/views/admin/catalog-import-preview.blade.php": "d138c28b70fed2cebfc9f72ba7a6158e399807974b635ecb72bb92e1d7d333e9",
+    "jmac_app/docs/EXCEL_PREPARACION_409.md": "89becfa5985e61a7690192a7348d7cf7edc7d9e260a27b6ec727e037a732a8cb",
+    "LEEME_PREPARACION_EXCEL.txt": "89becfa5985e61a7690192a7348d7cf7edc7d9e260a27b6ec727e037a732a8cb"
+  },
+  "no_javascript_files": true,
+  "no_env_storage_database_vendor_assets_or_ini": true,
+  "migrations": 0,
+  "hosting_applied": false,
+  "owner_original_workbook_tested": false
+}
