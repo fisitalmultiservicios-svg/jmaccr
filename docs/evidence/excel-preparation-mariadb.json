@@ -1,0 +1,12 @@
+{
+  "tool": "phpunit",
+  "result": "passed",
+  "tests": 26,
+  "passed": 26,
+  "assertions": 376,
+  "duration_ms": 18181,
+  "command": "php artisan test --filter=CatalogImportTest|ExcelPhotoImportTest|ExcelValidationTest|ExcelPreparationTest",
+  "engine": "MariaDB 11.8.6",
+  "database": "jmac_excel_prepare_feature_test",
+  "database_dropped": true
+}

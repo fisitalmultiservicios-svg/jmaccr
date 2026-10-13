@@ -1,0 +1,37 @@
+{
+  "result": "PASSED",
+  "engine": "MariaDB 11.8.6",
+  "parallel_php_workers": 2,
+  "first": {
+    "handled": true,
+    "offset": 10,
+    "status": "processing"
+  },
+  "second": {
+    "handled": true,
+    "offset": 12,
+    "status": "ready"
+  },
+  "second_wait_ms": 725,
+  "preview_counts": {
+    "products": 0,
+    "media": 0,
+    "photos": 12
+  },
+  "actual_lock_timeout": {
+    "handled": false,
+    "offset": 0,
+    "status": "processing"
+  },
+  "unrelated_database_failure_raised": {
+    "raised": true,
+    "code": 1644
+  },
+  "resumed_after_timeout": {
+    "handled": true,
+    "offset": 12,
+    "status": "ready"
+  },
+  "remote_host_tested": false,
+  "database_dropped": true
+}

@@ -65,7 +65,9 @@ class CatalogImportController extends Controller
     public function prepare(Request $request, int $id, CatalogImports $imports)
     {
         $this->batch($request, $id);
-        $imports->preparePhotos($id, $request->user());
+        if (! $imports->preparePhotos($id, $request->user())) {
+            return redirect('/admin/catalog/imports/'.$id)->with('photo_retry_delay', 5000)->with('status', 'Otra petición está preparando estas fotografías. El avance se conserva y esta pantalla volverá a comprobarlo.');
+        }
 
         return redirect('/admin/catalog/imports/'.$id);
     }

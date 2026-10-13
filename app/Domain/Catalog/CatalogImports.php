@@ -7,6 +7,7 @@ use App\Domain\Cms\Blocks;
 use App\Domain\Media\ImageUpload;
 use App\Domain\System\Backups;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -217,33 +218,26 @@ final class CatalogImports
         return $id;
     }
 
-    public function preparePhotos(int $id, User $user): void
+    public function preparePhotos(int $id, User $user): bool
     {
         $this->cleanup();
         $owned = DB::table('import_batches')->where('actor_id', $user->id)->find($id);
         abort_unless($owned, 404);
         $this->authorize($user, json_decode($owned->mapping, true)['mode']);
         abort_unless($user->hasPermission('media.create'), 403);
-        $directory = app(ExcelCatalog::class)->directory();
-        $lock = fopen($directory.'/prepare-'.$id.'.lock', 'c');
-        if (! $lock || ! flock($lock, LOCK_EX | LOCK_NB)) {
-            if ($lock) {
-                fclose($lock);
-            }
-            abort(409, 'La preparación ya está en curso.');
-        }
-        chmod($directory.'/prepare-'.$id.'.lock', 0600);
         try {
+            // InnoDB serializes the offset and state using this row lock. A
+            // second browser request waits for the finite chunk instead of
+            // failing on a separate, host-dependent filesystem lock.
             DB::transaction(function () use ($id, $user) {
                 $batch = DB::table('import_batches')->where('actor_id', $user->id)->lockForUpdate()->find($id);
                 abort_unless($batch, 404);
                 $mapping = json_decode($batch->mapping, true);
                 $this->authorize($user, $mapping['mode']);
                 abort_unless($user->hasPermission('media.create'), 403);
-                if ($batch->status === 'ready') {
+                if ($batch->status !== 'processing') {
                     return;
                 }
-                abort_unless($batch->status === 'processing', 422, 'El lote no está pendiente de preparar.');
                 try {
                     $mapping['photos_prepared'] = app(CatalogImportPhotos::class)->prepare($mapping);
                     $finished = $mapping['photos_prepared'] === count($mapping['photo_parts']);
@@ -257,10 +251,16 @@ final class CatalogImports
                     $this->removePayload($mapping);
                 }
             });
-        } finally {
-            flock($lock, LOCK_UN);
-            fclose($lock);
+        } catch (QueryException $exception) {
+            // Retry only an actual MySQL lock timeout/deadlock. Other database
+            // or storage failures must remain visible rather than be hidden.
+            if (in_array($exception->errorInfo[1] ?? null, [1205, 1213], true)) {
+                return false;
+            }
+            throw $exception;
         }
+
+        return true;
     }
 
     private function taxonomy(string $table, ?string $name, string $status): ?int

@@ -1,0 +1,11 @@
+{
+  "result": "PASSED",
+  "native_unzip": true,
+  "preserved_configuration_vendor_public_index_assets_and_excel_validation": true,
+  "preserved_private_root_permissions": true,
+  "file_and_directory_modes": "0644 / 0755; no private root permission change",
+  "javascript_files": 0,
+  "migrations": 0,
+  "archive_sha256": "4a325e73267a366532c894c21e70de2e76d2e1970123692a426a5b35585a674e",
+  "hosting_applied": false
+}

@@ -3,8 +3,30 @@
 <p class="eyebrow">CATÁLOGO · EXCEL</p><h1>{{ $batch->status==='completed'?'Importación aplicada':'Revisión de importación' }}</h1><p>{{ $mapping['source_name'] }} · {{ $mapping['mode']==='replace'?'Reemplazar catálogo':'Sumar al catálogo' }}</p>
 <div class="dashboard-grid">@foreach(['new'=>'Nuevos','updated'=>'Actualizados','restored'=>'Restaurados','retired'=>'Retirados','errors'=>'Errores'] as $key=>$label)<div class="card"><strong>{{ $counts[$key]??0 }}</strong><p>{{ $label }}</p></div>@endforeach</div>
 @if($batch->status==='processing')
-<section class="card"><h2>Preparando fotografías</h2><p>{{ $mapping['photos_prepared']??0 }} de {{ count($mapping['photo_parts']??[]) }} fotografías listas. El catálogo todavía no ha cambiado. Mantén esta pantalla abierta; se procesan hasta diez fotos por petición.</p><form id="prepare-excel-photos" method="post" action="/admin/catalog/imports/{{ $batch->id }}/prepare">@csrf<button type="submit">Continuar preparación de fotografías</button></form><form method="post" action="/admin/catalog/imports/{{ $batch->id }}/cancel">@csrf<button type="submit" class="secondary">Cancelar sin cambiar el catálogo</button></form></section>
-@if(!$errors->any())<script nonce="{{ request()->attributes->get('csp_nonce') }}">setTimeout(function(){const form=document.getElementById('prepare-excel-photos');if(form){form.requestSubmit();}},500);</script>@endif
+<section class="card"><h2>Preparando fotografías</h2><p>{{ $mapping['photos_prepared']??0 }} de {{ count($mapping['photo_parts']??[]) }} fotografías listas. El catálogo todavía no ha cambiado. Mantén esta pantalla abierta; se procesan hasta diez fotos por petición.</p><p id="excel-photo-progress" role="status" aria-live="polite">Puedes dejar que continúe automáticamente o pulsar el botón una vez.</p><form id="prepare-excel-photos" method="post" action="/admin/catalog/imports/{{ $batch->id }}/prepare">@csrf<button type="submit">Continuar preparación de fotografías</button></form><form id="cancel-excel-photos" method="post" action="/admin/catalog/imports/{{ $batch->id }}/cancel">@csrf<button type="submit" class="secondary">Cancelar sin cambiar el catálogo</button></form></section>
+<script nonce="{{ request()->attributes->get('csp_nonce') }}">
+(function(){
+    const form=document.getElementById('prepare-excel-photos');
+    if(!form){return;}
+    let submitting=false;
+    let timer;
+    form.addEventListener('submit',function(event){
+        if(submitting){event.preventDefault();return;}
+        submitting=true;
+        clearTimeout(timer);
+        form.querySelector('button[type="submit"]').disabled=true;
+        document.getElementById('excel-photo-progress').textContent='Preparando fotografías. El avance se guarda antes de continuar.';
+    });
+    document.getElementById('cancel-excel-photos').addEventListener('submit',function(){
+        submitting=true;
+        clearTimeout(timer);
+    });
+    window.addEventListener('pageshow',function(event){if(event.persisted){window.location.reload();}});
+    @if(!$errors->any())
+    timer=setTimeout(function(){if(!submitting){form.requestSubmit();}},{{ session('photo_retry_delay')===5000?5000:500 }});
+    @endif
+})();
+</script>
 @elseif($batch->status==='ready')
 <section class="card"><h2>3. Confirma los cambios</h2><p>Todavía no se ha modificado ningún producto. Esta vista previa dura dos horas. Antes de guardar se creará una copia privada cifrada.</p>@if($mapping['mode']==='replace')<p class="error">El catálogo activo quedará formado únicamente por este Excel. Los productos ausentes pasarán a papelera. El histórico de preventas permanece intacto.</p>@endif<form method="post" action="/admin/catalog/imports/{{ $batch->id }}/apply">@csrf<label><input type="checkbox" name="confirm" value="1" required>He revisado el archivo y autorizo estos cambios.</label>@if($mapping['mode']==='replace')<label>Escribe REEMPLAZAR para confirmar<input name="phrase" autocomplete="off" required maxlength="30"></label>@endif
 @if(count($mapping['photo_parts']??[]) && $canApprovePhotos)<label><input type="checkbox" name="approve_photos" value="1">Confirmo que tengo permiso para usar estas fotografías y autorizo su publicación.</label>@endif
