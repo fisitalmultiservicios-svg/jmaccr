@@ -1,7 +1,7 @@
 {
   "archive": "JMAC-correccion-HTTP-400.zip",
   "bytes": 5980,
-  "sha256": "556edb47ce4f7c35fcb4531e220ac0f15339f7ef16e1c05dc2367bf837f43f00",
+  "sha256": "16e24ec6dcf97a8e591262e543072c2190a08629e634cb08fb3b529f36cdce26",
   "payload_files": 4,
   "file_checksums": {
     "jmac_app/app/Http/Middleware/SecurityHeaders.php": "748777c1ac6bc1aad5916b840e2ce3be7f1ae69f17a3ecaa8ffdb01679ff8926",
